@@ -1,0 +1,5 @@
+#container{ padding-top: 40px; min-height: 500px;}
+.jumbotron{ padding-top: 40px; }
+.well{ margin-top: 100px; }
+legend{ margin: 0; }
+.nav > li {position: relative;}
