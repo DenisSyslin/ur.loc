@@ -20,13 +20,13 @@
                         </table>
                     </div>
                     <div class="span3">
-                        <h3><?php echo __('Тэги') ?></h3>
+                        <h3><?php echo __('Статьи') ?></h3>
                         <table class="dashboard">
                             <tr>
-                                <td><img src="<?php echo URL::site('/asserts/default/images/tag.png') ?>" alt=""/></td>
+                                <td><img src="<?php echo URL::site('/asserts/default/images/article.png') ?>" alt=""/></td>
                                 <td>
-									<i class="icon-tag"></i><a href="<?php echo URL::site('/admin/tags') ?>"><?php echo __('Список тэгов') ?></a><br/>
-                                    <i class="icon-plus"></i><a href="<?php echo URL::site('/admin/tags/new') ?>"><?php echo __('Новый тэг') ?></a><br/>
+									<i class="icon-font"></i><a href="<?php echo URL::site('/admin/articles') ?>"><?php echo __('Список статей') ?></a><br/>
+                                    <i class="icon-plus"></i><a href="<?php echo URL::site('/admin/articles/new') ?>"><?php echo __('Новая статья') ?></a><br/>
 								</td>
                             </tr>
                         </table>

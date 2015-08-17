@@ -20,24 +20,6 @@
                         </li>
                         <li>
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                Тэги <i class="caret"></i>
-                            </a>
-                            <ul class="dropdown-menu pull-right">
-                                <li><a href="<?php echo URL::site('/admin/tags') ?>"><i class="icon-tag"></i> <?php echo __('Список тэгов') ?></a></li>
-                                <li><a href="<?php echo URL::site('/admin/tags/new') ?>"><i class="icon-plus"></i> <?php echo __('Новый тэг') ?></a></li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                Рубрики <i class="caret"></i>
-                            </a>
-                            <ul class="dropdown-menu pull-right">
-                                <li><a href="<?php echo URL::site('/admin/categories') ?>"><i class="icon-file"></i> <?php echo __('Список рубрик') ?></a></li>
-                                <li><a href="<?php echo URL::site('/admin/categories/new') ?>"><i class="icon-plus"></i> <?php echo __('Добавить рубрику') ?></a></li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                 Статьи <i class="caret"></i>
                             </a>
                             <ul class="dropdown-menu pull-right">
@@ -50,6 +32,7 @@
                                 Сайт <i class="caret"></i>
                             </a>
                             <ul class="dropdown-menu pull-right">
+                                <li><a href="<?php echo URL::site('/admin/main') ?>"><i class="icon-cog"></i> <?php echo __('Содержимое главной') ?></a></li>
                                 <li><a href="<?php echo URL::site('/admin/configs') ?>"><i class="icon-cog"></i> <?php echo __('Настройки') ?></a></li>
                             </ul>
                         </li>
