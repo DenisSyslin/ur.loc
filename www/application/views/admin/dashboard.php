@@ -1,6 +1,6 @@
 <?php defined('SYSPATH') or die('No direct script access.'); ?>
 <div id="container">
-	<div id="content" class="container">
+	<div class="container">
 		<div class="row">
             <div class="span12">
                 <h1><?php echo __('Панель управления') ?></h1>

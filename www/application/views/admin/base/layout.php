@@ -19,7 +19,8 @@
 
         <!-- Base URL -->
         <base href="<?php echo URL::base(true, false) ?>">
-
+        <link rel="shortcut icon" href="/favicon.png" type="image/png"/>
+		
         <!-- System -->
         <meta name="author" content="<?php echo isset($author) ? $author : Arr::path($config, 'blog.author') ?>" />
         <meta name="description" content="<?php echo isset($description) ? $description : Arr::path($config, 'blog.description') ?>" />

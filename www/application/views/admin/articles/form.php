@@ -8,7 +8,7 @@
                 <div class="control-group<?php if (!empty($errors) AND Arr::get($errors, 'name')) : ?> error<?php endif; ?>">
 		            <label for="name" class="control-label"><?php echo __('Имя статьи') ?>:</label>
 	                <div class="controls">
-	                    <input type="text" name="name" id="name" value="<?php echo Arr::get($item, 'name') ?>"/>
+	                    <input type="text" name="name" id="name" class="span7" value="<?php echo Arr::get($item, 'name') ?>"/>
 						<?php if (!empty($errors) AND Arr::get($errors, 'name')) : ?>
 							<div class="help-block"><?php echo Arr::get($errors, 'name') ?></div>
 						<?php endif; ?>
@@ -18,7 +18,7 @@
                 <div class="control-group<?php if (!empty($errors) AND Arr::get($errors, 'title')) : ?> error<?php endif; ?>">
 		            <label for="title" class="control-label"><?php echo __('Title окна') ?>:</label>
 	                <div class="controls">
-	                    <input type="text" name="title" id="title" value="<?php echo Arr::get($item, 'title') ?>"/>
+	                    <input type="text" name="title" id="title" class="span7" value="<?php echo Arr::get($item, 'title') ?>"/>
 						<?php if (!empty($errors) AND Arr::get($errors, 'title')) : ?>
 							<div class="help-block"><?php echo Arr::get($errors, 'title') ?></div>
 						<?php endif; ?>
@@ -28,7 +28,7 @@
                 <div class="control-group<?php if (!empty($errors) AND Arr::get($errors, 'content')) : ?> error<?php endif; ?>">
 			        <label for="content" class="control-label"><?php echo __('Контент') ?>:</label>
                     <div class="controls">
-		                <textarea rows="3" name="content" id="content"><?php echo Arr::get($item, 'content') ?></textarea>
+		                <?php echo $contentAria; ?>
 	                    <?php if (!empty($errors) AND Arr::get($errors, 'content')) : ?>
                             <div class="help-block"><?php echo Arr::get($errors, 'content') ?></div>
 	                    <?php endif; ?>
@@ -36,25 +36,25 @@
 	            </div>
 
 		        <div class="control-group">
-			        <label for="visible" class="control-label"><?php echo __('Видимость статьи') ?></label>
-					<div class="controls">
-						<?php
-							$selected = '';
-							$visible  = Arr::get($item, 'visible');
-							if (!empty($visible)) {
-								if ($visible == 'yes') {
-									$selected = 'selected="selected"';
-								}
+					<?php
+						$checked = '';
+						$visible = Arr::get($item, 'visible');
+
+						if (!empty($visible)) {
+							if ($visible == 'yes') {
+								$checked = 'checked="checked"';
 							}
-							else {
-								$selected = 'selected="selected"';
-							}
-						?>
-					    <input id="visible" type="checkbox" name="visible" value="yes" <?php echo $selected; ?>/>
+						}
+						else {
+							$checked = 'checked="checked"';
+						}
+					?>
+					<label class="checkbox inline">
+						<input type="checkbox" name="visible" value="yes" <?php echo $checked; ?>/><?php echo __('Видимость статьи') ?>
 					    <?php if (!empty($errors) AND Arr::get($errors, 'visible')) : ?>
 							<div class="help-block"><?php echo Arr::get($errors, 'visible') ?></div>
 						<?php endif; ?>
-			        </div>
+					</label>
 		        </div>
 
 	        </fieldset>

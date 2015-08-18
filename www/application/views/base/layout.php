@@ -19,6 +19,7 @@
 
         <!-- Base URL -->
         <base href="<?php echo URL::base(true, false) ?>">
+        <link rel="shortcut icon" href="/favicon.png" type="image/png"/>
 
         <!-- System -->
         <meta name="author" content="<?php echo isset($author) ? $author : Arr::path($config, 'blog.author') ?>" />
@@ -26,7 +27,7 @@
         <meta name="keywords" content="<?php echo isset($keywords) ? $keywords : Arr::path($config, 'blog.keywords') ?>" />
 
 		<link href="/asserts/default/css/style.css" type="text/css" rel="stylesheet" media="all" />
-        
+		
 		<!-- Twitter Bootstrap -->
         <link href="/asserts/default/bootstrap/css/bootstrap.min.css" type="text/css" rel="stylesheet" media="all" />
         <link href="/asserts/default/bootstrap/css/bootstrap-theme.min.css" type="text/css" rel="stylesheet" media="all" />

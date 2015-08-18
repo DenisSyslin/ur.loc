@@ -30,6 +30,14 @@
 		public $config = array();
 	 
 		/**
+		 * Global variables
+		 *
+		 * @property array
+		 * @access private
+		 */
+		private $globals = array();
+	 
+		/**
 		 * Default layout template
 		 *
 		 * @property View
@@ -67,6 +75,17 @@
 		
 			$this -> template -> set($key, $value);
 		}
+				
+		/**
+		 * Установить глобальный параметр для базового шаблона
+		 *
+		 * @param string $key
+		 * @param string $value
+		 */
+		protected function setGlobalParam($key, $value) {
+		
+			$this -> globals[ $key ] = $value;
+		}
 		
 		/**
 		 * Отобразить пользовательскую страницу 
@@ -77,7 +96,7 @@
 		protected function showPage($path, $data = array()) {
 		
 			$content = View::factory($path, $data);
-		
+
 			$html = $content;
 		
 			if (!empty($data[ 'pagetitle' ])) {

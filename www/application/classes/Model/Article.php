@@ -17,26 +17,7 @@
 		 * @access protected
 		 */
 		protected $_table_name = 'articles';
-	
-		/**
-		 * Table columns
-		 * @property array
-		 * @access protected
-		 */
-		protected $_table_columns = array(
-			'id'          => 'id',
-			'name'        => 'name',
-			'title'       => 'title',
-			'description' => 'description',
-			'keywords'    => 'keywords', 
-			'content'     => 'content',
-			'created'     => 'created',
-			'visible'     => 'visible',
-			'action'      => 'action',
-			'user'        => 'user',					
-			'changed'     => 'changed',
-		);
-		
+
 		/**
 		 * Получить список статей
 		 *
@@ -94,7 +75,7 @@
 				'keywords', 
 				'content',
 				'created',
-				'visible'					
+				'visible'
 			)
 				-> from($this -> _table_name)
 				-> where('id', '=', $article_id)

@@ -8,7 +8,7 @@
                 <div class="control-group<?php if (!empty($errors) AND Arr::get($errors, 'username')) : ?> error<?php endif; ?>">
 		            <label for="username" class="control-label"><?php echo __('Имя пользователя') ?>:</label>
 	                <div class="controls">
-	                    <input type="text" name="username" id="username" value="<?php echo Arr::get($item, 'username') ?>"/>
+	                    <input type="text" name="username" class="span7" id="username" value="<?php echo Arr::get($item, 'username') ?>"/>
 						<?php if (!empty($errors) AND Arr::get($errors, 'username')) : ?>
 							<div class="help-block"><?php echo Arr::get($errors, 'username') ?></div>
 						<?php endif; ?>
@@ -18,7 +18,7 @@
                 <div class="control-group<?php if (!empty($errors) AND Arr::get($errors, 'email')) : ?> error<?php endif; ?>">
 			        <label for="email" class="control-label"><?php echo __('Email') ?>:</label>
                     <div class="controls">
-		                <input type="text" name="email" id="email" value="<?php echo Arr::get($item, 'email') ?>"/>
+		                <input type="text" name="email" class="span7" id="email" value="<?php echo Arr::get($item, 'email') ?>"/>
 	                    <?php if (!empty($errors) AND Arr::get($errors, 'email')) : ?>
                             <div class="help-block"><?php echo Arr::get($errors, 'email') ?></div>
 	                    <?php endif; ?>
@@ -28,7 +28,7 @@
                 <div class="control-group<?php if (!empty($errors) AND Arr::get($errors, 'password')) : ?> error<?php endif; ?>">
 		            <label for="password" class="control-label"><?php echo __('Пароль') ?>:</label>
                     <div class="controls">
-		                <input type="password" name="password" id="password"/>
+		                <input type="password" name="password" class="span7" id="password"/>
 	                    <?php if (!empty($errors) AND Arr::get($errors, 'password')) : ?>
                             <div class="help-block"><?php echo Arr::get($errors, 'password') ?></div>
 	                    <?php endif; ?>

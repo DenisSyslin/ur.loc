@@ -1,7 +1,7 @@
 <?php defined('SYSPATH') or die('No direct script access.'); ?>
 
 <div id="container">
-    <div id="content" class="container">
+    <div class="container">
         <div class="row title">
 	        <div class="span12">
                 <h1 class="pull-left"><?php echo __('Список статей') ?></h1>
@@ -29,6 +29,7 @@
                         <th><?php echo __('ID') ?></th>
                         <th><?php echo __('Имя') ?></th>
                         <th><?php echo __('Дата создания') ?></th>
+                        <th><?php echo __('Видимость') ?></th>
                         <th><?php echo __('Действия') ?></th>
                     </tr>
                     </thead>
@@ -37,15 +38,25 @@
 				        <?php if (!empty($items)) : ?>
 						    <?php foreach ($items as $item) : ?>
 	                        <tr>
-	                            <td><?php echo $item -> id ?></td>
-	                            <td><?php echo $item -> name ?></td>
-	                            <td><?php echo $item -> created; ?></td>
+	                            <td><?php echo $item[ 'id' ] ?></td>
+	                            <td><?php echo $item[ 'name' ] ?></td>
+	                            <td><?php echo $item[ 'created' ]; ?></td>
+	                            <td>
+									<div class="btn-group">
+										<?php if ($item[ 'visible' ] == 'yes'): ?>
+											<a href="#" class="btn btn-success btn-lg"><span class="icon-white icon-ok"></span> </a>
+										<?php else: ?>
+											<a href="#" class="btn btn-danger btn-lg"><span class="icon-white icon-remove"></span> </a>
+										<?php endif; ?>
+									</div>
+
+								</td>
 	                            <td class="actions">
 		                            <div class="btn-group">
-		                                <a class="btn" href="<?php echo URL::site('admin/articles/delete/' . $item -> id) ?>">
+		                                <a class="btn" href="<?php echo URL::site('admin/articles/delete/' . $item[ 'id' ]) ?>">
 											<i class="icon-remove"></i> <?php echo __('Удалить') ?>
 										</a>
-		                                <a class="btn btn-primary" href="<?php echo URL::site('admin/articles/edit/' . $item -> id) ?>">
+		                                <a class="btn btn-primary" href="<?php echo URL::site('admin/articles/edit/' . $item[ 'id' ]) ?>">
 											<i class="icon-edit"></i> <?php echo __('Редактировать') ?>
 										</a>
                                     </div>

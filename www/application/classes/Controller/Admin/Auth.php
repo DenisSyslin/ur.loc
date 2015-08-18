@@ -63,6 +63,8 @@
 							
 							if ($role -> name == 'admin') {
 								
+								Session::instance() -> set('CKDeditor', TRUE);
+								
 								HTTP::redirect(URL::site($this -> success_url, TRUE, FALSE));
 							}
 						}
