@@ -34,7 +34,7 @@
                     </thead>
 
                     <tbody>
-				        <?php if ($items -> count()) : ?>
+				        <?php if (!empty($items)) : ?>
 						    <?php foreach ($items as $item) : ?>
 	                        <tr>
 	                            <td><?php echo $item -> id ?></td>

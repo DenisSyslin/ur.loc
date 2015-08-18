@@ -24,7 +24,10 @@
 		 * @property string
 		 */
 		protected $model;
-		 
+
+		/**
+		 * Конструктор
+		 */	
 		public function __construct(Request $request, Response $response) {
 		
 			parent::__construct($request, $response);
