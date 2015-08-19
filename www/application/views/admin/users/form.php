@@ -38,7 +38,7 @@
                 <div class="control-group<?php if (!empty($errors) AND Arr::get($errors, 'password_confirm')) : ?> error<?php endif; ?>">
 		            <label for="password_confirm" class="control-label"><?php echo __('Подтверждение пароля') ?>:</label>
                     <div class="controls">
-		                <input type="password" name="password_confirm" id="password_confirm"/>
+		                <input type="password" name="password_confirm" class="span7" id="password_confirm"/>
 	                    <?php if (!empty($errors) AND Arr::get($errors, 'password_confirm')) : ?>
                             <div class="help-block"><?php echo Arr::get($errors, 'password_confirm') ?></div>
 	                    <?php endif; ?>

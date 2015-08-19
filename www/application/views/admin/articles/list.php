@@ -65,14 +65,14 @@
 						    <?php endforeach; ?>
 					    <?php else: ?>
 		                    <tr>
-		                        <td colspan="4"><?php echo __('Нет статей') ?></td>
+		                        <td colspan="5"><?php echo __('Нет статей') ?></td>
 		                    </tr>
 					    <?php endif; ?>
                     </tbody>
 
                     <tfoot>
 	                    <tr>
-	                        <td colspan="3"><?php echo $pagination ?></td>
+	                        <td colspan="4"><?php echo $pagination ?></td>
 	                        <td class="cell-middle"><?php echo __('Total: :count', array(':count' => $pagination -> total_items)) ?></td>
 	                    </tr>
                     </tfoot>

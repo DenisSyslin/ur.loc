@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Хост: 127.0.0.1
--- Время создания: Авг 17 2015 г., 16:00
+-- Время создания: Авг 19 2015 г., 10:15
 -- Версия сервера: 5.5.25
 -- Версия PHP: 5.4.37
 
@@ -26,6 +26,7 @@ SET time_zone = "+00:00";
 -- Структура таблицы `articles`
 --
 
+DROP TABLE IF EXISTS `articles`;
 CREATE TABLE IF NOT EXISTS `articles` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `name` text NOT NULL COMMENT 'Имя статьи, и её заголовок',
@@ -39,7 +40,7 @@ CREATE TABLE IF NOT EXISTS `articles` (
   `user` int(11) NOT NULL DEFAULT '0' COMMENT 'Пользователь изменивший статью',
   `changed` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT 'Дата изменения статьи',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
 
 -- --------------------------------------------------------
 
@@ -47,6 +48,7 @@ CREATE TABLE IF NOT EXISTS `articles` (
 -- Структура таблицы `configs`
 --
 
+DROP TABLE IF EXISTS `configs`;
 CREATE TABLE IF NOT EXISTS `configs` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `group_name` varchar(128) NOT NULL DEFAULT 'site',
@@ -66,9 +68,54 @@ INSERT INTO `configs` (`id`, `group_name`, `config_key`, `config_ru_key`, `confi
 -- --------------------------------------------------------
 
 --
+-- Структура таблицы `news`
+--
+
+DROP TABLE IF EXISTS `news`;
+CREATE TABLE IF NOT EXISTS `news` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `name` text NOT NULL COMMENT 'Имя новости, и её заголовок',
+  `title` varchar(100) NOT NULL DEFAULT '' COMMENT 'Title окна',
+  `keywords` varchar(255) NOT NULL DEFAULT '' COMMENT 'Meta tag "Keywords" (Ключевые слова)',
+  `description` varchar(255) NOT NULL DEFAULT '' COMMENT 'Meta tag "Description"(Описание страницы)',
+  `content` longtext NOT NULL COMMENT 'Наполнение, включая ссылки, изображения, и полосу разделения <!-- pagebreak -->',
+  `created` datetime NOT NULL COMMENT 'Дата создания новости',
+  `visible` enum('yes','no') NOT NULL DEFAULT 'yes' COMMENT 'Видимость новости',
+  `action` varchar(10) NOT NULL DEFAULT '' COMMENT 'Последнее действие пользователя изменившего новость',
+  `user` int(11) NOT NULL DEFAULT '0' COMMENT 'Пользователь изменивший новость',
+  `changed` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT 'Дата изменения новости',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `pages`
+--
+
+DROP TABLE IF EXISTS `pages`;
+CREATE TABLE IF NOT EXISTS `pages` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `type` varchar(10) NOT NULL DEFAULT '' COMMENT 'Тип страницы',
+  `title` varchar(100) NOT NULL DEFAULT '' COMMENT 'Title окна',
+  `keywords` varchar(255) NOT NULL DEFAULT '' COMMENT 'Meta tag "Keywords" (Ключевые слова)',
+  `description` varchar(255) NOT NULL DEFAULT '' COMMENT 'Meta tag "Description"(Описание страницы)',
+  `content` longtext NOT NULL COMMENT 'Наполнение, включая ссылки, изображения, и полосу разделения <!-- pagebreak -->',
+  `created` datetime NOT NULL COMMENT 'Дата создания страницы',
+  `visible` enum('yes','no') NOT NULL DEFAULT 'yes' COMMENT 'Видимость страницы',
+  `action` varchar(10) NOT NULL DEFAULT '' COMMENT 'Последнее действие пользователя изменившего страницу',
+  `user` int(11) NOT NULL DEFAULT '0' COMMENT 'Пользователь изменивший страницу',
+  `changed` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT 'Дата изменения страницы',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
 -- Структура таблицы `roles`
 --
 
+DROP TABLE IF EXISTS `roles`;
 CREATE TABLE IF NOT EXISTS `roles` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(32) NOT NULL,
@@ -91,6 +138,7 @@ INSERT INTO `roles` (`id`, `name`, `description`) VALUES
 -- Структура таблицы `roles_users`
 --
 
+DROP TABLE IF EXISTS `roles_users`;
 CREATE TABLE IF NOT EXISTS `roles_users` (
   `user_id` int(10) unsigned NOT NULL,
   `role_id` int(10) unsigned NOT NULL,
@@ -112,28 +160,10 @@ INSERT INTO `roles_users` (`user_id`, `role_id`) VALUES
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `tags`
---
-
-CREATE TABLE IF NOT EXISTS `tags` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `name` varchar(50) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=14 ;
-
---
--- Дамп данных таблицы `tags`
---
-
-INSERT INTO `tags` (`id`, `name`) VALUES
-(13, 'Kohana');
-
--- --------------------------------------------------------
-
---
 -- Структура таблицы `ulogins`
 --
 
+DROP TABLE IF EXISTS `ulogins`;
 CREATE TABLE IF NOT EXISTS `ulogins` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
   `user_id` int(11) NOT NULL,
@@ -149,6 +179,7 @@ CREATE TABLE IF NOT EXISTS `ulogins` (
 -- Структура таблицы `users`
 --
 
+DROP TABLE IF EXISTS `users`;
 CREATE TABLE IF NOT EXISTS `users` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `email` varchar(254) NOT NULL,
@@ -160,7 +191,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `uniq_username` (`username`),
   UNIQUE KEY `uniq_email` (`email`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
 
 --
 -- Дамп данных таблицы `users`
@@ -177,6 +208,7 @@ INSERT INTO `users` (`id`, `email`, `username`, `photo`, `password`, `logins`, `
 -- Структура таблицы `user_tokens`
 --
 
+DROP TABLE IF EXISTS `user_tokens`;
 CREATE TABLE IF NOT EXISTS `user_tokens` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `user_id` int(11) unsigned NOT NULL,

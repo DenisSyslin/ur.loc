@@ -151,6 +151,8 @@
 		
 		/**
 		 * Удалить параметр
+		 * 
+		 * @throw HTTP_Exception_404
 		 */
 		public function action_delete() {
 		
@@ -166,6 +168,7 @@
 			
 				throw new HTTP_Exception_404('Параметр не найден.');
 			}
+			
 			// Del param
 			if ($this -> model -> del($param_id)) {
 		 
@@ -186,6 +189,8 @@
 		
 		/**
 		 * Получить список элементов
+		 * 
+		 * @return array
 		 */
 		protected function _getItems() {
 		
@@ -200,6 +205,8 @@
 		
 		/**
 		 * Получить объект валидации POST запроса
+		 * 
+		 * @param array массив проверенных данных
 		 */
 		protected function _getPostValidation() {
 		
