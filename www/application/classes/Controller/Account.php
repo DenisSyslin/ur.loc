@@ -1,7 +1,7 @@
 <?php defined('SYSPATH') or die('No direct script access.');
 
 	/**
-	 * Контроллер управления доступом в админку
+	 * Контроллер управления доступом в ЛК
 	 *
 	 * @name        Controller_Account
 	 * @category    Classes

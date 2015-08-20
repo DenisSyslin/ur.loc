@@ -16,3 +16,78 @@
 #9 Z:\home\ur.loc\www\system\classes\Kohana\Request.php(997): Kohana_Request_Client->execute(Object(Request))
 #10 Z:\home\ur.loc\www\index.php(118): Kohana_Request->execute()
 #11 {main} in Z:\home\ur.loc\www\modules\database\classes\Kohana\Database\Query.php:251
+2015-08-20 17:34:39 --- CRITICAL: ErrorException [ 8 ]: Undefined variable: menu ~ APPPATH\views\base\layout.php [ 45 ] in Z:\home\ur.loc\www\application\views\base\layout.php:45
+2015-08-20 17:34:39 --- DEBUG: #0 Z:\home\ur.loc\www\application\views\base\layout.php(45): Kohana_Core::error_handler(8, 'Undefined varia...', 'Z:\\home\\ur.loc\\...', 45, Array)
+#1 Z:\home\ur.loc\www\system\classes\Kohana\View.php(62): include('Z:\\home\\ur.loc\\...')
+#2 Z:\home\ur.loc\www\system\classes\Kohana\View.php(359): Kohana_View::capture('Z:\\home\\ur.loc\\...', Array)
+#3 Z:\home\ur.loc\www\system\classes\Kohana\Controller\Template.php(44): Kohana_View->render()
+#4 Z:\home\ur.loc\www\system\classes\Kohana\Controller.php(87): Kohana_Controller_Template->after()
+#5 [internal function]: Kohana_Controller->execute()
+#6 Z:\home\ur.loc\www\system\classes\Kohana\Request\Client\Internal.php(97): ReflectionMethod->invoke(Object(Controller_Pages))
+#7 Z:\home\ur.loc\www\system\classes\Kohana\Request\Client.php(114): Kohana_Request_Client_Internal->execute_request(Object(Request), Object(Response))
+#8 Z:\home\ur.loc\www\system\classes\Kohana\Request.php(997): Kohana_Request_Client->execute(Object(Request))
+#9 Z:\home\ur.loc\www\index.php(118): Kohana_Request->execute()
+#10 {main} in Z:\home\ur.loc\www\application\views\base\layout.php:45
+2015-08-20 17:34:57 --- CRITICAL: ErrorException [ 8 ]: Undefined variable: menu ~ APPPATH\views\base\layout.php [ 45 ] in Z:\home\ur.loc\www\application\views\base\layout.php:45
+2015-08-20 17:34:57 --- DEBUG: #0 Z:\home\ur.loc\www\application\views\base\layout.php(45): Kohana_Core::error_handler(8, 'Undefined varia...', 'Z:\\home\\ur.loc\\...', 45, Array)
+#1 Z:\home\ur.loc\www\system\classes\Kohana\View.php(62): include('Z:\\home\\ur.loc\\...')
+#2 Z:\home\ur.loc\www\system\classes\Kohana\View.php(359): Kohana_View::capture('Z:\\home\\ur.loc\\...', Array)
+#3 Z:\home\ur.loc\www\system\classes\Kohana\Controller\Template.php(44): Kohana_View->render()
+#4 Z:\home\ur.loc\www\system\classes\Kohana\Controller.php(87): Kohana_Controller_Template->after()
+#5 [internal function]: Kohana_Controller->execute()
+#6 Z:\home\ur.loc\www\system\classes\Kohana\Request\Client\Internal.php(97): ReflectionMethod->invoke(Object(Controller_Pages))
+#7 Z:\home\ur.loc\www\system\classes\Kohana\Request\Client.php(114): Kohana_Request_Client_Internal->execute_request(Object(Request), Object(Response))
+#8 Z:\home\ur.loc\www\system\classes\Kohana\Request.php(997): Kohana_Request_Client->execute(Object(Request))
+#9 Z:\home\ur.loc\www\index.php(118): Kohana_Request->execute()
+#10 {main} in Z:\home\ur.loc\www\application\views\base\layout.php:45
+2015-08-20 17:35:59 --- CRITICAL: ErrorException [ 8 ]: Undefined variable: menu ~ APPPATH\views\base\layout.php [ 45 ] in Z:\home\ur.loc\www\application\views\base\layout.php:45
+2015-08-20 17:35:59 --- DEBUG: #0 Z:\home\ur.loc\www\application\views\base\layout.php(45): Kohana_Core::error_handler(8, 'Undefined varia...', 'Z:\\home\\ur.loc\\...', 45, Array)
+#1 Z:\home\ur.loc\www\system\classes\Kohana\View.php(62): include('Z:\\home\\ur.loc\\...')
+#2 Z:\home\ur.loc\www\system\classes\Kohana\View.php(359): Kohana_View::capture('Z:\\home\\ur.loc\\...', Array)
+#3 Z:\home\ur.loc\www\system\classes\Kohana\Controller\Template.php(44): Kohana_View->render()
+#4 Z:\home\ur.loc\www\system\classes\Kohana\Controller.php(87): Kohana_Controller_Template->after()
+#5 [internal function]: Kohana_Controller->execute()
+#6 Z:\home\ur.loc\www\system\classes\Kohana\Request\Client\Internal.php(97): ReflectionMethod->invoke(Object(Controller_Pages))
+#7 Z:\home\ur.loc\www\system\classes\Kohana\Request\Client.php(114): Kohana_Request_Client_Internal->execute_request(Object(Request), Object(Response))
+#8 Z:\home\ur.loc\www\system\classes\Kohana\Request.php(997): Kohana_Request_Client->execute(Object(Request))
+#9 Z:\home\ur.loc\www\index.php(118): Kohana_Request->execute()
+#10 {main} in Z:\home\ur.loc\www\application\views\base\layout.php:45
+2015-08-20 17:49:19 --- CRITICAL: View_Exception [ 0 ]: The requested view pages/new could not be found ~ SYSPATH\classes\Kohana\View.php [ 265 ] in Z:\home\ur.loc\www\system\classes\Kohana\View.php:145
+2015-08-20 17:49:19 --- DEBUG: #0 Z:\home\ur.loc\www\system\classes\Kohana\View.php(145): Kohana_View->set_filename('pages/new')
+#1 Z:\home\ur.loc\www\system\classes\Kohana\View.php(30): Kohana_View->__construct('pages/new', Array)
+#2 Z:\home\ur.loc\www\application\classes\Controller\Layout\Default.php(98): Kohana_View::factory('pages/new', Array)
+#3 Z:\home\ur.loc\www\application\classes\Controller\Pages.php(46): Controller_Layout_Default->showPage('pages/new', Array)
+#4 Z:\home\ur.loc\www\system\classes\Kohana\Controller.php(84): Controller_Pages->action_index()
+#5 [internal function]: Kohana_Controller->execute()
+#6 Z:\home\ur.loc\www\system\classes\Kohana\Request\Client\Internal.php(97): ReflectionMethod->invoke(Object(Controller_Pages))
+#7 Z:\home\ur.loc\www\system\classes\Kohana\Request\Client.php(114): Kohana_Request_Client_Internal->execute_request(Object(Request), Object(Response))
+#8 Z:\home\ur.loc\www\system\classes\Kohana\Request.php(997): Kohana_Request_Client->execute(Object(Request))
+#9 Z:\home\ur.loc\www\index.php(118): Kohana_Request->execute()
+#10 {main} in Z:\home\ur.loc\www\system\classes\Kohana\View.php:145
+2015-08-20 18:08:28 --- CRITICAL: ErrorException [ 1 ]: Using $this when not in object context ~ APPPATH\views\block\menu.php [ 4 ] in file:line
+2015-08-20 18:08:28 --- DEBUG: #0 [internal function]: Kohana_Core::shutdown_handler()
+#1 {main} in file:line
+2015-08-20 18:21:55 --- CRITICAL: View_Exception [ 0 ]: The requested view articles/main could not be found ~ SYSPATH\classes\Kohana\View.php [ 265 ] in Z:\home\ur.loc\www\system\classes\Kohana\View.php:145
+2015-08-20 18:21:55 --- DEBUG: #0 Z:\home\ur.loc\www\system\classes\Kohana\View.php(145): Kohana_View->set_filename('articles/main')
+#1 Z:\home\ur.loc\www\system\classes\Kohana\View.php(30): Kohana_View->__construct('articles/main', Array)
+#2 Z:\home\ur.loc\www\application\classes\Controller\Layout\Default.php(98): Kohana_View::factory('articles/main', Array)
+#3 Z:\home\ur.loc\www\application\classes\Controller\Articles.php(40): Controller_Layout_Default->showPage('articles/main', Array)
+#4 Z:\home\ur.loc\www\system\classes\Kohana\Controller.php(84): Controller_Articles->action_index()
+#5 [internal function]: Kohana_Controller->execute()
+#6 Z:\home\ur.loc\www\system\classes\Kohana\Request\Client\Internal.php(97): ReflectionMethod->invoke(Object(Controller_Articles))
+#7 Z:\home\ur.loc\www\system\classes\Kohana\Request\Client.php(114): Kohana_Request_Client_Internal->execute_request(Object(Request), Object(Response))
+#8 Z:\home\ur.loc\www\system\classes\Kohana\Request.php(997): Kohana_Request_Client->execute(Object(Request))
+#9 Z:\home\ur.loc\www\index.php(118): Kohana_Request->execute()
+#10 {main} in Z:\home\ur.loc\www\system\classes\Kohana\View.php:145
+2015-08-20 18:25:58 --- CRITICAL: View_Exception [ 0 ]: The requested view block/footer.php could not be found ~ SYSPATH\classes\Kohana\View.php [ 265 ] in Z:\home\ur.loc\www\system\classes\Kohana\View.php:145
+2015-08-20 18:25:58 --- DEBUG: #0 Z:\home\ur.loc\www\system\classes\Kohana\View.php(145): Kohana_View->set_filename('block/footer.ph...')
+#1 Z:\home\ur.loc\www\system\classes\Kohana\View.php(30): Kohana_View->__construct('block/footer.ph...', NULL)
+#2 Z:\home\ur.loc\www\application\classes\Controller\Layout\Default.php(103): Kohana_View::factory('block/footer.ph...')
+#3 Z:\home\ur.loc\www\application\classes\Controller\Pages.php(71): Controller_Layout_Default->showPage('pages/about', Array)
+#4 Z:\home\ur.loc\www\system\classes\Kohana\Controller.php(84): Controller_Pages->action_about()
+#5 [internal function]: Kohana_Controller->execute()
+#6 Z:\home\ur.loc\www\system\classes\Kohana\Request\Client\Internal.php(97): ReflectionMethod->invoke(Object(Controller_Pages))
+#7 Z:\home\ur.loc\www\system\classes\Kohana\Request\Client.php(114): Kohana_Request_Client_Internal->execute_request(Object(Request), Object(Response))
+#8 Z:\home\ur.loc\www\system\classes\Kohana\Request.php(997): Kohana_Request_Client->execute(Object(Request))
+#9 Z:\home\ur.loc\www\index.php(118): Kohana_Request->execute()
+#10 {main} in Z:\home\ur.loc\www\system\classes\Kohana\View.php:145

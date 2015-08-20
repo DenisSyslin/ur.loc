@@ -1,7 +1,4 @@
 .container{ margin: 0 auto; max-width: 960px;}
-.navbar-brand {
-    float: left;
-    margin: 10px;
-    font-size: 20px;
-    color: #888;
-}
+.navbar-brand {float: left; margin: 10px; font-size: 20px; color: #888;}
+#wrapper{min-height: 650px;}
+
