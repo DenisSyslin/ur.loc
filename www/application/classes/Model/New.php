@@ -9,7 +9,7 @@
 	 * @author      Суслин Денис 2015г. <programist1985@gmail.com>
 	 */
 	 
-	class Model_New extends Model_Database {
+	class Model_New extends Model_Layout_CRUD {
 	
 		/**
 		 * Table name

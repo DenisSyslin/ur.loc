@@ -27,7 +27,7 @@
                     <thead>
                     <tr>
                         <th><?php echo __('ID') ?></th>
-                        <th><?php echo __('Имя') ?></th>
+                        <th><?php echo __('Тип') ?></th>
                         <th><?php echo __('Дата создания') ?></th>
                         <th><?php echo __('Видимость') ?></th>
                         <th><?php echo __('Действия') ?></th>
@@ -39,7 +39,7 @@
 						    <?php foreach ($items as $item) : ?>
 	                        <tr>
 	                            <td><?php echo $item[ 'id' ] ?></td>
-	                            <td><?php echo $item[ 'name' ] ?></td>
+	                            <td><?php echo $item[ 'type' ] ?></td>
 	                            <td><?php echo $item[ 'created' ]; ?></td>
 	                            <td>
 									<div class="btn-group">

@@ -5,12 +5,12 @@
 	        <fieldset>
 	            <legend><?php echo __('Основное') ?></legend>
 				
-                <div class="control-group<?php if (!empty($errors) AND Arr::get($errors, 'name')) : ?> error<?php endif; ?>">
-		            <label for="name" class="control-label"><?php echo __('Имя страницы') ?>:</label>
+                <div class="control-group<?php if (!empty($errors) AND Arr::get($errors, 'type')) : ?> error<?php endif; ?>">
+		            <label for="type" class="control-label"><?php echo __('Тип страницы') ?>:</label>
 	                <div class="controls">
-	                    <input type="text" name="name" id="name" class="span7" value="<?php echo Arr::get($item, 'name') ?>"/>
-						<?php if (!empty($errors) AND Arr::get($errors, 'name')) : ?>
-							<div class="help-block"><?php echo Arr::get($errors, 'name') ?></div>
+	                    <input type="text" name="type" id="type" class="span7" value="<?php echo Arr::get($item, 'type') ?>"/>
+						<?php if (!empty($errors) AND Arr::get($errors, 'type')) : ?>
+							<div class="help-block"><?php echo Arr::get($errors, 'type') ?></div>
 						<?php endif; ?>
 	                </div>
 	            </div>

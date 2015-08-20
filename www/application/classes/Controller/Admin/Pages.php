@@ -9,7 +9,7 @@
 	 * @author      Суслин Денис 2015г. <programist1985@gmail.com>
 	 */
 	 
-	class Controller_Pages_Articles extends Controller_Admin_Layout_ExtentionGRUD {
+	class Controller_Admin_Pages extends Controller_Admin_Layout_ExtentionGRUD {
 	 
 		/**
 		 * Имя контроллера в единственном числе
@@ -92,14 +92,14 @@
 			$post = Validation::factory($post)
 				-> labels(array(
 						
-					'name'        => __('Имя статьи'),
+					'type'        => __('Тип страницы'),
 					'title'       => __('Title окна'),
 					'content'     => __('Контент'),
 					'description' => __('Описнаие'),
 					'keywords'    => __('Ключевые слова'),
 					'visible'     => __('Видимость'),
 				))
-				-> rule('name', 'not_empty')
+				-> rule('type', 'not_empty')
 				-> rule('content', 'not_empty')
 				-> rule('content', 'min_length', array(':value', 4))	
 				-> rule('title', 'not_empty');

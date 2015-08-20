@@ -9,7 +9,7 @@
 	 * @author      Суслин Денис 2015г. <programist1985@gmail.com>
 	 */
 	 
-	class Model_Page extends Model_Database {
+	class Model_Page extends Model_Layout_CRUD {
 	
 		/**
 		 * Table name
@@ -25,7 +25,7 @@
 		 */
 		public function getList() {
 		
-			$this -> columns = array('id', 'name', 'type', 'created', 'visible', 'action', 'user');
+			$this -> columns = array('id', 'type', 'created', 'visible', 'action', 'user');
 		
 			return parent::getList();
 		}
@@ -38,7 +38,7 @@
 		 */
 		public function get($page_id) {
 		
-			$this -> columns = array('id', 'name', 'title', 'description', 'keywords', 'content', 'created', 'visible');
+			$this -> columns = array('id', 'type', 'title', 'description', 'keywords', 'content', 'created', 'visible');
 
 			return parent::get($page_id);
 		}
