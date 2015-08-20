@@ -38,3 +38,9 @@
 #10 Z:\home\ur.loc\www\system\classes\Kohana\Request.php(997): Kohana_Request_Client->execute(Object(Request))
 #11 Z:\home\ur.loc\www\index.php(118): Kohana_Request->execute()
 #12 {main} in Z:\home\ur.loc\www\application\views\admin\articles\list.php:41
+2015-08-19 19:30:36 --- CRITICAL: ErrorException [ 4 ]: syntax error, unexpected '}' ~ APPPATH\classes\Controller\Admin\Articles.php [ 39 ] in file:line
+2015-08-19 19:30:36 --- DEBUG: #0 [internal function]: Kohana_Core::shutdown_handler()
+#1 {main} in file:line
+2015-08-19 19:31:04 --- CRITICAL: ErrorException [ 4 ]: syntax error, unexpected 'protected' (T_PROTECTED) ~ APPPATH\classes\Controller\Admin\Layout\ExtentionGRUD.php [ 82 ] in file:line
+2015-08-19 19:31:04 --- DEBUG: #0 [internal function]: Kohana_Core::shutdown_handler()
+#1 {main} in file:line

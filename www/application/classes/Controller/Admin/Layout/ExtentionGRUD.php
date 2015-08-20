@@ -12,7 +12,7 @@
 	abstract class Controller_Admin_Layout_ExtentionGRUD extends Controller_Admin_Layout_Secure {
 		
 		/**
-		 * Имя контроллера в деинственном числе
+		 * Имя контроллера в единственном числе
 		 * @property string
 		 * @access protected
 		 */
@@ -34,7 +34,6 @@
 
 			$data = array();
 
-			
 			// Подключить постраничную навигацию			
 			$this -> pagination	= Pagination::factory(array(
 				'group'       => 'admin',
@@ -50,37 +49,9 @@
 			$data[ 'message' ]      = Session::instance() -> get_once('mess');
 			$data[ 'message_type' ] = Session::instance() -> get_once('message_type');
 			
-			$this -> setParam('pagetitle', 'Список статей');
-			
-			$this -> showAdmin($this -> ormName . 's/list', $data);	
-
-
-
-
-
-
-		
-			$data = array();
-			
-			$this -> orm = ORM::factory($this -> ormName) -> reset(FALSE);
-			
-			// Подключить постраничную навигацию			
-			$this -> pagination	= Pagination::factory(array(
-				'group'       => 'admin',
-				'total_items' => $this -> orm -> count_all()
-			));
-			
-			// Элементы страницы
-			$data[ 'items' ]      = $this -> _getItems();
-			$data[ 'pagination' ] = $this -> pagination;
-			
-			// Получение сообщений для страницы
-			$data[ 'message' ]      = Session::instance() -> get_once('mess');
-			$data[ 'message_type' ] = Session::instance() -> get_once('message_type');
-			
 			$this -> setParam('pagetitle', $pagetitle);
 			
-			$this -> showAdmin($this -> ormName . 's/list', $data);	
+			$this -> showAdmin($this -> cName . 's/list', $data);	
 		}
 		
 		/**
@@ -89,13 +60,16 @@
 		 * @param string $pagetitle заголовок страницы
 		 */
 		protected function grudNew($pagetitle) {
-		
+			
 			$data = array();
 				
-			$data[ 'item' ] = ORM::factory($this -> ormName) -> as_array();
+			$data[ 'item' ] = array_merge($this -> request -> post(), array());
 			
+			// Получение визуального редактора
+			View::set_global('contentAria', MyCKEditor::wysiwyg('content', Arr::get($data[ 'item' ], 'content')));
+
 			$this -> setParam('pagetitle', $pagetitle);
-			$this -> showAdmin($this -> ormName . 's/new', $data);	
+			$this -> showAdmin($this -> cName . 's/new', $data);	
 		}
 		
 		/**
@@ -106,28 +80,35 @@
 		 */
 		protected function grudEdit($pagetitle) {
 		
+		
 			$data = array();
 			
 			// Получить идентификатор из строки запроса
-			$item_id = $this -> request -> param('id');
+			$record_id = $this -> request -> param('id');
 			
-			if (!$item_id) {
+			if (!$record_id) {
 
 				throw new HTTP_Exception_404('Запись не найдена.');
 			}
 	 
 			// Получить запись
-			$this -> orm = ORM::factory($this -> ormName, $item_id);
-			
-			if (!$this -> orm -> loaded()) {
+			if (!$record = $this -> model -> get($record_id)) {
 
 				throw new HTTP_Exception_404('Запись не найдена.');
 			}
 	 
-			$data[ 'item' ] = $this -> orm -> as_array();
+			//echo '<pre>';
+			//print_r($record);
+			//echo '</pre>';
+			//die();
+				
+			$data[ 'item' ] = $record;
+			
+			// Получение визуального редактора
+			View::set_global('contentAria', MyCKEditor::wysiwyg('content', Arr::get($data[ 'item' ], 'content')));
 			
 			$this -> setParam('pagetitle', $pagetitle);
-			$this -> showAdmin($this -> ormName . 's/edit', $data);	
+			$this -> showAdmin($this -> cName . 's/edit', $data);	
 		}
 		
 		/**
@@ -147,38 +128,57 @@
 			// Back
 			if ($this -> request -> post('back')) {
 
-				HTTP::redirect('/admin/' . $this -> ormName . 's');
+				HTTP::redirect('/admin/' . $this -> cName . 's');
 			}
-	 
+			
 			$post = $this -> _getPostValidation();
 
+			$record_id = (Arr::get($post -> data(), 'id') ? Arr::get($post -> data(), 'id') : 0);
+			
 			// check validation
 			if ($post -> check()) {
 
 				// store
 				$data = $post -> data();
+				unset($data[ 'save' ]);
 	 
-				$this -> orm = ORM::factory($this -> ormName, Arr::get($data, 'id'));
+				//echo '<pre>';
+				//print_r($data);
+				//echo '</pre>';
+				//die();
+				
+				if (empty($data[ 'visible' ]) OR $data[ 'visible' ] != 'yes') {
+					
+					$data[ 'visible' ] = 'no';
+				}
 
-				// update record
-				$this -> orm -> values($data, $this -> fields) -> save();
+				$data[ 'created' ] = date('Y-m-d H:i:s');
+				$data[ 'user' ] = Auth::instance() -> get_user() -> id;
 	 
-				// message
-				Session::instance() -> set('mess', (Arr::get($post -> data(), 'id') ? 'Запись обновлена.' : 'Запись создана.'));
-				Session::instance() -> set('message_type', 'success');
+				$data[ 'action' ] = (( ! empty($record_id) ) ? 'Update ' : 'Add ') . UTF8::ucfirst($this -> cName);
 	 
-				// redirect to list page
-				HTTP::redirect(URL::site('/admin/' . $this -> ormName . 's'));
+				if ($this -> model -> save(Arr::get($data, 'id'), $data)) {
+						 
+					// message
+					Session::instance() -> set('mess', (( ! empty($record_id) ) ? 'Запись обновлена.' : 'Запись создана.'));
+					Session::instance() -> set('message_type', 'success');
+		        
+					// redirect to list page
+					HTTP::redirect(URL::site('/admin/' . $this -> cName . 's'));
+				}
 			}
-	 
+	 	 
 			// Errors list
 			View::set_global('errors', $post -> errors('validation'));
 	 
 			$data = array();
 			$data[ 'item' ] = $post -> data();
 			
+			// Получение визуального редактора
+			View::set_global('contentAria', MyCKEditor::wysiwyg('content', Arr::get($data[ 'item' ], 'content')));
+			
 			$this -> setParam('pagetitle', $pagetitle);
-			$this -> showAdmin($this -> ormName . 's/' . (Arr::get($post -> data(), 'id') ? 'edit' : 'new'), $data);	
+			$this -> showAdmin($this -> cName . 's/' . (( ! empty($record_id) ) ? 'edit' : 'new'), $data);	
 		}
 		
 		/**
@@ -188,28 +188,32 @@
 		 */
 		protected function grudDelete() {
 		
-			$item_id = $this -> request -> param('id');
+			$record_id = $this -> request -> param('id');
 			
-			if (!$item_id) {
+			if (!$record_id OR !is_numeric($record_id)) {
 			
 				throw new HTTP_Exception_404('Запись не найдена.');
 			}
 	 
 			// Get record
-			$this -> orm = ORM::factory($this -> ormName, $item_id);
-			
-			if (!$this -> orm -> loaded()) {
+			if (!$record = $this -> model -> get($record_id)) {
 			
 				throw new HTTP_Exception_404('Запись не найдена.');
 			}
-	 
-			// Set message
-			Session::instance()
-				-> set('mess', __('Запись :record удалена.', array(':record' => $this -> orm -> {$this -> nameFiled})))
-				-> set('message_type', 'success');
-	 
-			// Delete record
-			$this -> orm -> delete();
+			
+			// Del record
+			if ($this -> model -> del($record_id)) {
+		 
+				Session::instance()
+					-> set('mess', __('Запись :record удалена.', array(':record' => $record[ 'name' ])))
+					-> set('message_type', 'success');
+			}
+			else {
+					 
+				Session::instance()
+					-> set('mess', __('Запись :record НЕ удален.', array(':record' => $record[ 'name' ])))
+					-> set('message_type', 'error');
+			}
 	 
 			// Redirect to base page
 			HTTP::redirect($this -> request -> referrer());
