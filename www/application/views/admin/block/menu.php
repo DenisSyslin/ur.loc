@@ -27,12 +27,22 @@
                                 <li><a href="<?php echo URL::site('/admin/articles/new') ?>"><i class="icon-plus"></i> <?php echo __('Добавить статью') ?></a></li>
                             </ul>
                         </li>
+						<li>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                Новости <i class="caret"></i>
+                            </a>
+                            <ul class="dropdown-menu pull-right">
+                                <li><a href="<?php echo URL::site('/admin/news') ?>"><i class="icon-font"></i> <?php echo __('Список новостей') ?></a></li>
+                                <li><a href="<?php echo URL::site('/admin/news/new') ?>"><i class="icon-plus"></i> <?php echo __('Добавить новость') ?></a></li>
+                            </ul>
+                        </li>
+
                         <li>
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                 Сайт <i class="caret"></i>
                             </a>
                             <ul class="dropdown-menu pull-right">
-                                <li><a href="<?php echo URL::site('/admin/main') ?>"><i class="icon-cog"></i> <?php echo __('Содержимое главной') ?></a></li>
+                                <li><a href="<?php echo URL::site('/admin/pages') ?>"><i class="icon-cog"></i> <?php echo __('Страницы сайта') ?></a></li>
                                 <li><a href="<?php echo URL::site('/admin/configs') ?>"><i class="icon-cog"></i> <?php echo __('Настройки') ?></a></li>
                             </ul>
                         </li>
