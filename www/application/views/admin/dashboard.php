@@ -31,6 +31,30 @@
                             </tr>
                         </table>
                     </div>
+					<div class="span3">
+                        <h3><?php echo __('Страницы сайта') ?></h3>
+                        <table class="dashboard">
+                            <tr>
+                                <td><img src="<?php echo URL::site('/asserts/default/images/category.png') ?>" alt=""/></td>
+                                <td>
+									<i class="icon-font"></i><a href="<?php echo URL::site('/admin/pages') ?>"><?php echo __('Список страниц') ?></a><br/>
+                                    <i class="icon-plus"></i><a href="<?php echo URL::site('/admin/pages/new') ?>"><?php echo __('Новая страница') ?></a><br/>
+								</td>
+                            </tr>
+                        </table>
+                    </div>
+					<div class="span3">
+                        <h3><?php echo __('Новости') ?></h3>
+                        <table class="dashboard">
+                            <tr>
+                                <td><img src="<?php echo URL::site('/asserts/default/images/article.png') ?>" alt=""/></td>
+                                <td>
+									<i class="icon-font"></i><a href="<?php echo URL::site('/admin/news') ?>"><?php echo __('Список новостей') ?></a><br/>
+                                    <i class="icon-plus"></i><a href="<?php echo URL::site('/admin/news/new') ?>"><?php echo __('Новая новость') ?></a><br/>
+								</td>
+                            </tr>
+                        </table>
+                    </div>
                 </div>
             </div>
 		</div>
