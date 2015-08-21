@@ -10,10 +10,65 @@
 	 */
 	 
 	class Controller_Pages extends Controller_Layout_Default {
-
+	
+		/**
+		 * Основная модель
+		 * @access protected
+		 * @property string
+		 */
+		protected $model;
+		
+		/**
+		 * Имя контроллера в единственном числе
+		 * @property string
+		 * @access protected
+		 */
+		protected $cName = 'page';
+		
+		/**
+		 * Конструктор
+		 */	
+		public function __construct(Request $request, Response $response) {
+		
+			parent::__construct($request, $response);
+		
+			$this -> model = Model::factory(UTF8::ucfirst($this -> cName));
+		}
+		
+		/**
+		 * Главная страница
+		 */
 		public function action_index() {
 		
-
+			$data = array();
+			$data[ 'current_page' ] = 'main';
+		
+			$this -> setParam('pagetitle', 'Главная страница');
+			$this -> showPage($this -> cName . 's/main', $data);	
+		}
+		
+		/**
+		 * Страница помощь
+		 */
+		public function action_help() {
+		
+			$data = array();
+			$data[ 'current_page' ] = 'help';
+		
+			$this -> setParam('pagetitle', 'Помощь');
+			$this -> showPage($this -> cName . 's/help', $data);	
+		}
+		
+		/**
+		 * Страница о нас
+		 */
+		public function action_about() {
+		
+			$data = array();
+			$data[ 'current_page' ] = 'about';
+		
+			$this -> setParam('pagetitle', 'О нас');
+			$this -> showPage($this -> cName . 's/about', $data);	
 		}
 	} 
 

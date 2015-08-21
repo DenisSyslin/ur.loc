@@ -97,6 +97,11 @@
 		
 			$content = View::factory($path, $data);
 
+			$menu = View::factory('block/menu');
+			$menu -> current = $data[ 'current_page' ];
+
+			$footer = View::factory('block/footer');
+			
 			$html = $content;
 		
 			if (!empty($data[ 'pagetitle' ])) {
@@ -105,6 +110,8 @@
 			}
 		
 			// Set content template
+			$this -> template -> set('menu', $menu);
+			$this -> template -> set('footer', $footer);
 			$this -> template -> set('content', $html);
 		}
 	} 

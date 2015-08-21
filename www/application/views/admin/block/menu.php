@@ -32,7 +32,7 @@
                                 Новости <i class="caret"></i>
                             </a>
                             <ul class="dropdown-menu pull-right">
-                                <li><a href="<?php echo URL::site('/admin/news') ?>"><i class="icon-font"></i> <?php echo __('Список новостей') ?></a></li>
+                                <li><a href="<?php echo URL::site('/admin/news') ?>"><i class="icon-volume-up"></i> <?php echo __('Список новостей') ?></a></li>
                                 <li><a href="<?php echo URL::site('/admin/news/new') ?>"><i class="icon-plus"></i> <?php echo __('Добавить новость') ?></a></li>
                             </ul>
                         </li>
@@ -42,7 +42,7 @@
                                 Сайт <i class="caret"></i>
                             </a>
                             <ul class="dropdown-menu pull-right">
-                                <li><a href="<?php echo URL::site('/admin/pages') ?>"><i class="icon-cog"></i> <?php echo __('Страницы сайта') ?></a></li>
+                                <li><a href="<?php echo URL::site('/admin/pages') ?>"><i class="icon-list-alt"></i> <?php echo __('Страницы сайта') ?></a></li>
                                 <li><a href="<?php echo URL::site('/admin/configs') ?>"><i class="icon-cog"></i> <?php echo __('Настройки') ?></a></li>
                             </ul>
                         </li>
