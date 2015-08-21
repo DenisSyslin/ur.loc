@@ -1,5 +1,5 @@
 <?php defined('SYSPATH') or die('No direct script access.'); ?>
-<form action="<?php echo URL::site('/admin/configs/save') ?>" method="post" name="config-form" class="config-form">
+<form action="<?php echo URL::site('/admin/configs/save') ?>" method="post" class="ctrl-s-form">
     <div class="row">
 		<div class="span9">
 	        <fieldset>

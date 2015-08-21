@@ -8,7 +8,15 @@
                 <div class="control-group<?php if (!empty($errors) AND Arr::get($errors, 'type')) : ?> error<?php endif; ?>">
 		            <label for="type" class="control-label"><?php echo __('Тип страницы') ?>:</label>
 	                <div class="controls">
-	                    <input type="text" name="type" id="type" class="span7" value="<?php echo Arr::get($item, 'type') ?>"/>
+						<?php $type = Arr::get($item, 'type'); ?>
+						<select name="type" id="type" class="span7">
+							<option <?php if (empty($type))        : echo 'selected="selected"'; endif;?> value="0">Выберите</option>
+							<option <?php if ($type == 'main')     : echo 'selected="selected"'; endif;?> value="main">Главная</option>
+							<option <?php if ($type == 'articles') : echo 'selected="selected"'; endif;?> value="articles">Аналитика</option>
+							<option <?php if ($type == 'news')     : echo 'selected="selected"'; endif;?> value="news">Новости</option>
+							<option <?php if ($type == 'help')     : echo 'selected="selected"'; endif;?> value="help">Помощь</option>
+							<option <?php if ($type == 'about')    : echo 'selected="selected"'; endif;?> value="about">О нас</option>
+						</select>
 						<?php if (!empty($errors) AND Arr::get($errors, 'type')) : ?>
 							<div class="help-block"><?php echo Arr::get($errors, 'type') ?></div>
 						<?php endif; ?>

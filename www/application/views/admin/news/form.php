@@ -1,5 +1,5 @@
 <?php defined('SYSPATH') or die('No direct script access.'); ?>
-<form action="<?php echo URL::site('/admin/news/save') ?>" method="post" name="role-form" class="role-form">
+<form action="<?php echo URL::site('/admin/news/save') ?>" method="post" class="ctrl-s-form">
     <div class="row">
 		<div class="span9">
 	        <fieldset>

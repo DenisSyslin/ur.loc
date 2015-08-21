@@ -1,5 +1,12 @@
 <?php defined('SYSPATH') or die('No direct script access.'); ?>
-
+<?php
+	$types = array();
+	$types[ 'main' ]     = 'Главная';
+	$types[ 'articles' ] = 'Аналитика';
+	$types[ 'news' ]     = 'Новости';
+	$types[ 'help' ]     = 'Помощь';
+	$types[ 'about' ]    = 'О нас';
+?>
 <div id="container">
     <div class="container">
         <div class="row title">
@@ -39,7 +46,7 @@
 						    <?php foreach ($items as $item) : ?>
 	                        <tr>
 	                            <td><?php echo $item[ 'id' ] ?></td>
-	                            <td><?php echo $item[ 'type' ] ?></td>
+	                            <td><?php echo $types[ $item[ 'type' ] ]; ?></td>
 	                            <td><?php echo $item[ 'created' ]; ?></td>
 	                            <td>
 									<div class="btn-group">

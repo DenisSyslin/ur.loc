@@ -21,7 +21,7 @@ return array(
 	'numeric'       => 'Поле :field должно быть числом',
 	'phone'         => ':field must be a phone number',
 	'range'         => ':field must be within the range of :param2 to :param3',
-	'regex'         => ':field does not match the required format',
+	'regex'         => 'Поле :field содержит недопустимые символы',
 	'url'           => ':field must be a url',
 	'username' =>  array (
 		'Model_Validate::unique_username'  => 'Такой пользователь уже существует',
