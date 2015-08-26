@@ -30,8 +30,7 @@
 		
 		<!-- Twitter Bootstrap -->
         <link href="/asserts/<?php echo $TMP_PATH; ?>/bootstrap/css/bootstrap.min.css" type="text/css" rel="stylesheet" media="all" />
-        <link href="/asserts/<?php echo $TMP_PATH; ?>/bootstrap/css/bootstrap-responsive.css" type="text/css" rel="stylesheet" media="all" />
-        <link href="/asserts/<?php echo $TMP_PATH; ?>/bootstrap/css/bootstrap-theme.min.css" type="text/css" rel="stylesheet" media="all" />
+        <link href="/asserts/<?php echo $TMP_PATH; ?>/bootstrap/css/bootstrap-responsive.min.css" type="text/css" rel="stylesheet" media="all" />
 		
 		<?php if (!empty($styles)) : ?>
 			<?php foreach ($styles as $style) : ?>
@@ -52,13 +51,14 @@
 
     <body>
 
-        <?php echo isset($menu) ? $menu : '' ?>
-
 		<section id="wrapper" class="container">
-			<?php echo isset($content) ? $content : '' ?>
-		</section> 
+			<?php echo isset($menu) ? $menu : '' ?>
 
-        <?php echo isset($footer) ? $footer : '' ?>
+			<?php echo isset($content) ? $content : '' ?>
+
+			<?php echo isset($footer) ? $footer : '' ?>
+
+		</section> 
 
         <!-- JS Code -->
         <script type="text/javascript" src="/asserts/<?php echo $TMP_PATH; ?>/js/jquery-1.10.2.min.js"></script>

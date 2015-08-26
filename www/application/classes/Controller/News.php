@@ -1,22 +1,22 @@
 <?php defined('SYSPATH') or die('No direct script access.');
 
 	/**
-	 * Контроллер работы со статьями
+	 * Контроллер работы с новостями
 	 *
-	 * @name        Controller_Articles
+	 * @name        Controller_News
 	 * @category    classes
 	 * @subcategory Controller
 	 * @author      Суслин Денис 2015г. <programist1985@gmail.com>
 	 */
 	 
-	class Controller_Articles extends Controller_Layout_Default {
+	class Controller_News extends Controller_Layout_Default {
 	 
 		/**
 		 * Имя контроллера
 		 * @access protected
 		 * @property string
 		 */
-		protected $cName = 'article';
+		protected $cName = 'new';
 
 		/**
 		 * Конструктор
@@ -29,17 +29,28 @@
 		}
 		
 		/**
-		 * Список статей
+		 * Список новостей
 		 */
 		public function action_index() {
 		
 			$data = array();
 			$data[ 'current_page' ] = $this -> cName . 's';
 		
-			$this -> setParam('pagetitle', 'Список статей');
+			$this -> setParam('pagetitle', 'Список новостей');
 			$this -> showPage($this -> cName . 's/list', $data);	
 		}
 	} 
 
-    /* End of file Articles.php */
-    /* Location: ./application/classes/Controller/Articles.php */
+    /* End of file News.php */
+    /* Location: ./application/classes/Controller/News.php */
+
+	
+
+
+
+
+
+	
+
+
+	

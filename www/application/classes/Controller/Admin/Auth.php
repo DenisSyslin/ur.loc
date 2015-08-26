@@ -24,7 +24,7 @@
 		public function action_login() {
 		
 			// create template
-			$template = View::factory('admin/login');
+			$template = View::factory(parent::TMP_PATH . '/admin/login');
 	 
 			// init errors array
 			$errors = array();
@@ -80,6 +80,7 @@
 	 
 			// set content into template
 			$this -> template -> set('content', $template);
+			$this -> template -> set('TMP_PATH', parent::TMP_PATH);
 		}
 	 
 		/**
