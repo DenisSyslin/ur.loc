@@ -33,7 +33,8 @@
 		public function getList() {
 		
 			$query = DB::select_array($this -> columns)
-				-> from($this -> _table_name)
+				-> from(array($this -> _table_name, 't'))
+				-> join(array('users', 'u')) -> on('u.id', '=', 't.user')
 				-> execute();
 			
 			if (count($query)) {

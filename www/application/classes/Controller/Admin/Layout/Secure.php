@@ -12,12 +12,18 @@
 	abstract class Controller_Admin_Layout_Secure extends Controller_Layout_Secure {
 	 
 		/**
+		 * Default layout template path
+		 * @const string
+		 * @access public
+		 */
+		const TMP_PATH = 'default';
+	 
+		/**
 		 * Default layout template
-		 *
 		 * @property View
 		 * @access public
 		 */
-		public $template = 'admin/base/layout';
+		public $template = 'default/admin/base/layout';
 	 
 		/**
 		 * Login page URL
@@ -43,9 +49,9 @@
 		 */
 		protected function showAdmin($path, $data = array()) {
 		
-			$menu    = View::factory('admin/block/menu');
-			$footer  = View::factory('admin/block/footer');
-			$content = View::factory('admin/' . $path, $data);
+			$menu    = View::factory(self::TMP_PATH . '/admin/block/menu');
+			$footer  = View::factory(self::TMP_PATH . '/admin/block/footer');
+			$content = View::factory(self::TMP_PATH . '/admin/' . $path, $data);
 			
 			$html = $menu . $content . $footer;
 		

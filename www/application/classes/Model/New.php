@@ -25,7 +25,14 @@
 		 */
 		public function getList() {
 		
-			$this -> columns = array('id', 'name', 'created', 'visible', 'action', 'user');
+			$this -> columns = array(
+				't.id', 
+				't.name', 
+				't.created', 
+				't.visible', 
+				't.action', 
+				'u.username'
+			);
 		
 			return parent::getList();
 		}

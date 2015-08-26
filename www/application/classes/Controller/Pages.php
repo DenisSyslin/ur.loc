@@ -43,6 +43,8 @@
 			$data = array();
 			$data[ 'current_page' ] = 'main';
 		
+			$this -> addStylesheet('css/flexslider.css');
+			$this -> addScript('js_plagins/jquery.flexslider.js');
 			$this -> setParam('pagetitle', 'Главная страница');
 			$this -> showPage($this -> cName . 's/main', $data);	
 		}

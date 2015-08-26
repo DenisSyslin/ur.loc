@@ -12,6 +12,35 @@
 	abstract class Controller_Layout_Default extends Controller_Template {
 	 
 		/**
+		 * Default layout template path
+		 * @const string
+		 * @access public
+		 */
+		const TMP_PATH = 'default';
+	 
+		/**
+		 * Default layout template
+		 *
+		 * @property View
+		 * @access public
+		 */
+		public $template = 'default/base/layout';
+		
+		/**
+		 * Массив стилевых таблиц для базового шаблона
+		 * @access protected
+		 * @variable array
+		 */
+		protected $styles = array();
+		
+		/**
+		 * Массив скриптов для базового шаблона
+		 * @access protected
+		 * @variable array
+		 */
+		protected $scripts = array();
+	 
+		/**
 		 * Auto loading configs groups
 		 *
 		 * @property array
@@ -36,14 +65,6 @@
 		 * @access private
 		 */
 		private $globals = array();
-	 
-		/**
-		 * Default layout template
-		 *
-		 * @property View
-		 * @access public
-		 */
-		public $template = 'base/layout';
 	 
 		/**
 		 * Before execute action
@@ -88,6 +109,44 @@
 		}
 		
 		/**
+		 * Добавление стилевых таблиц в шаблон
+		 *
+		 * @param string $file название стилевой таблицы
+		 * @param bool $isUrl если стиль находится в интернете
+		 * @param string $media строка тип CSS (all, print, screen, media)
+		 */
+		public function addStylesheet($file, $isUrl = FALSE, $media = 'all') {
+		
+			if ($isUrl !== FALSE) {
+				$isUrl = TRUE;
+			}
+		
+			$this -> styles[] = array(
+				'file'  => $file,
+				'isUrl' => ($isUrl),
+				'media' => $media
+			);
+		}
+
+		/**
+		 * Добавление скриптов в шаблон
+		 *
+		 * @param string $file название скрипта
+		 * @param bool $isUrl если скрипт находится в интернете
+		 */
+		public function addScript($file, $isUrl = FALSE) {
+			
+			if ($isUrl !== FALSE) {
+				$isUrl = TRUE;
+			}
+		
+			$this -> scripts[] = array(
+				'file'   => $file,
+				'isUrl'  => ($isUrl)
+			);
+		}
+		
+		/**
 		 * Отобразить пользовательскую страницу 
 		 *
 		 * @param string $path путь к шаблону 
@@ -95,12 +154,12 @@
 		 */
 		protected function showPage($path, $data = array()) {
 		
-			$content = View::factory($path, $data);
+			$content = View::factory(self::TMP_PATH . '/' . $path, $data);
 
-			$menu = View::factory('block/menu');
+			$menu = View::factory(self::TMP_PATH . '/block/menu');
 			$menu -> current = $data[ 'current_page' ];
 
-			$footer = View::factory('block/footer');
+			$footer = View::factory(self::TMP_PATH . '/block/footer');
 			
 			$html = $content;
 		
@@ -110,9 +169,12 @@
 			}
 		
 			// Set content template
+			$this -> template -> set('TMP_PATH', self::TMP_PATH);
 			$this -> template -> set('menu', $menu);
 			$this -> template -> set('footer', $footer);
 			$this -> template -> set('content', $html);
+			$this -> template -> set('scripts', $this -> scripts);
+			$this -> template -> set('styles',  $this -> styles);
 		}
 	} 
 
