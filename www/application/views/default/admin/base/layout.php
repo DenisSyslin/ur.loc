@@ -14,7 +14,7 @@
 		<link type="text/css"  rel="stylesheet"    href="/asserts/default/css/admin.css" media="all" />
         
 		<!-- Twitter Bootstrap -->
-        <link type="text/css" rel="stylesheet"     href="/asserts/default/bootstrap/css/bootstrap.min.css" media="all" />
+        <link type="text/css" rel="stylesheet"     href="/asserts/default/bootstrap-old/css/bootstrap.min.css" media="all" />
 		
         <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
         <!--[if lt IE 9]>
@@ -27,7 +27,7 @@
 
         <!-- JS Code -->
         <script type="text/javascript" src="/asserts/default/js/jquery-1.10.2.min.js"></script>
-        <script type="text/javascript" src="/asserts/default/bootstrap/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="/asserts/default/bootstrap-old/js/bootstrap.min.js"></script>
         <script type="text/javascript" src="/asserts/default/js/admin.js"></script>
     </body>
 </html>

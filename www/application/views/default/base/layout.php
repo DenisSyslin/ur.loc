@@ -30,7 +30,7 @@
 		
 		<!-- Twitter Bootstrap -->
         <link href="/asserts/<?php echo $TMP_PATH; ?>/bootstrap/css/bootstrap.min.css" type="text/css" rel="stylesheet" media="all" />
-        <link href="/asserts/<?php echo $TMP_PATH; ?>/bootstrap/css/bootstrap-responsive.min.css" type="text/css" rel="stylesheet" media="all" />
+        <link href="/asserts/<?php echo $TMP_PATH; ?>/bootstrap/css/bootstrap-theme.min.css" type="text/css" rel="stylesheet" media="all" />
 		
 		<?php if (!empty($styles)) : ?>
 			<?php foreach ($styles as $style) : ?>

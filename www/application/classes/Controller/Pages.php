@@ -43,8 +43,6 @@
 			$data = array();
 			$data[ 'current_page' ] = 'main';
 		
-			$this -> addStylesheet('css/flexslider.css');
-			$this -> addScript('js_plagins/jquery.flexslider.js');
 			$this -> setParam('pagetitle', 'Главная страница');
 			$this -> showPage($this -> cName . 's/main', $data);	
 		}
@@ -69,8 +67,47 @@
 			$data = array();
 			$data[ 'current_page' ] = 'about';
 		
+			// Была отправлена форма обратной связи
+			if ($this -> request -> method() === Request::POST) {
+
+				$post = $this -> _getContactValidation();
+			
+				// Выполнить проверку
+				if ($post -> check()) {
+				
+				}
+				else {
+					
+					
+				}
+			}
+		
+			$data[ 'slogan' ] = 'Контакты';
 			$this -> setParam('pagetitle', 'О нас');
 			$this -> showPage($this -> cName . 's/about', $data);	
+		}
+		
+		/**
+		 * Получить объект валидации POST запроса, формы контактов
+		 */
+		protected function _getContactValidation() {
+		
+			$post = array_map('trim', $this -> request -> post());
+		
+			$post = Validation::factory($post)
+				-> labels(array(
+					'type'        => __('Тип страницы'),
+					'title'       => __('Title окна'),
+					'content'     => __('Контент'),
+					'description' => __('Описнаие'),
+					'keywords'    => __('Ключевые слова'),
+					'visible'     => __('Видимость'),
+				))
+				-> rule('type', 'not_empty')
+				-> rule('type', 'regex', array(':value', '~^[a-z]+$~ui'))
+				-> rule('title', 'not_empty');
+				
+			return $post;
 		}
 	} 
 
