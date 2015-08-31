@@ -49,6 +49,33 @@
 
 			return parent::get($page_id);
 		}
+		
+		/**
+		 * Получить страницу
+		 *
+		 * @param string $type тип страницы
+		 * @return array
+		 */
+		public function getByType($type) {
+		
+			$this -> columns = array('id', 'type', 'title', 'description', 'keywords', 'content', 'created', 'visible');
+			
+			$query = DB::select_array($this -> columns)
+				-> from($this -> _table_name)
+				-> where('type', '=', $type)
+				-> where('visible', '=', 'yes')
+				-> limit(1)
+				-> execute();
+			
+			if (count($query)) {
+			
+				$records = $query -> as_array();
+			
+				return array_pop($records);
+			}
+			
+			return FALSE;		
+		}
 	} 
 
     /* End of file Page.php */

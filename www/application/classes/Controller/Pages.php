@@ -67,6 +67,13 @@
 			$data = array();
 			$data[ 'current_page' ] = 'about';
 		
+			if (!$headers = $this -> model -> getByType('about')) {
+				
+				// 404	
+			}
+		
+			$item = array();
+		
 			// Была отправлена форма обратной связи
 			if ($this -> request -> method() === Request::POST) {
 
@@ -75,15 +82,35 @@
 				// Выполнить проверку
 				if ($post -> check()) {
 				
+					$data = $post -> data();
+				
+					$message = $data[ 'comment' ];
+					$subject = __(Config::getSiteParam('site_name')) . ':: Сообщение от пользователя ' . $data[ 'name' ];
+					$from    = $data[ 'email' ];
+				
+					Helper_Mail::mailSend(__(Config::getSiteParam('site_email')), $subject, $message, $from);
+
+					// Сообщение
+					Session::instance() -> set('mess', 'Спасибо за интерес проявленный к нашей компании. Мы свяжемся с вами в ближайшее время.');
+					Session::instance() -> set('message_type', 'success');
+		        
+					// Чистим форму
+					HTTP::redirect(URL::site('/pages/about'));	
 				}
-				else {
-					
-					
-				}
+				
+				$item = $this -> request -> post();
+				
+				// Возвращаем ошибки
+				View::set_global('errors', $post -> errors('validation'));
 			}
 		
-			$data[ 'slogan' ] = 'Контакты';
-			$this -> setParam('pagetitle', 'О нас');
+			// Получение сообщений для страницы
+			$data[ 'message' ]      = Session::instance() -> get_once('mess');
+			$data[ 'message_type' ] = Session::instance() -> get_once('message_type');
+		
+			$data[ 'item' ]   = $item;
+			$data[ 'slogan' ] = $headers[ 'title' ];
+			$this -> setParam('pagetitle', $headers[ 'title' ]);
 			$this -> showPage($this -> cName . 's/about', $data);	
 		}
 		
@@ -92,20 +119,21 @@
 		 */
 		protected function _getContactValidation() {
 		
-			$post = array_map('trim', $this -> request -> post());
+			$post = $this -> request -> post();
+			$post = array_map('trim', $post);
+			$post = array_map('strip_tags', $post);
 		
 			$post = Validation::factory($post)
 				-> labels(array(
-					'type'        => __('Тип страницы'),
-					'title'       => __('Title окна'),
-					'content'     => __('Контент'),
-					'description' => __('Описнаие'),
-					'keywords'    => __('Ключевые слова'),
-					'visible'     => __('Видимость'),
+					'name'    => __('Ваше ФИО'),
+					'email'   => __('Ваш email'),
+					'comment' => __('Сообщение')
 				))
-				-> rule('type', 'not_empty')
-				-> rule('type', 'regex', array(':value', '~^[a-z]+$~ui'))
-				-> rule('title', 'not_empty');
+				-> rule('name', 'not_empty')
+				-> rule('name', 'regex', array(':value', '~^[а-яё\d\-\_\s]+$~ui'))
+				-> rule('email', 'not_empty')
+				-> rule('email', 'email')
+				-> rule('comment', 'not_empty');
 				
 			return $post;
 		}

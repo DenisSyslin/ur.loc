@@ -56,3 +56,14 @@
 #16 Z:\home\ur.loc\www\system\classes\Kohana\Request.php(997): Kohana_Request_Client->execute(Object(Request))
 #17 Z:\home\ur.loc\www\index.php(118): Kohana_Request->execute()
 #18 {main} in Z:\home\ur.loc\www\application\views\default\block\header.php:2
+2015-08-27 19:47:26 --- CRITICAL: ErrorException [ 2 ]: array_map() expects parameter 1 to be a valid callback, function 'striptags' not found or invalid function name ~ APPPATH\classes\Controller\Pages.php [ 102 ] in file:line
+2015-08-27 19:47:26 --- DEBUG: #0 [internal function]: Kohana_Core::error_handler(2, 'array_map() exp...', 'Z:\\home\\ur.loc\\...', 102, Array)
+#1 Z:\home\ur.loc\www\application\classes\Controller\Pages.php(102): array_map('striptags', Array)
+#2 Z:\home\ur.loc\www\application\classes\Controller\Pages.php(78): Controller_Pages->_getContactValidation()
+#3 Z:\home\ur.loc\www\system\classes\Kohana\Controller.php(84): Controller_Pages->action_about()
+#4 [internal function]: Kohana_Controller->execute()
+#5 Z:\home\ur.loc\www\system\classes\Kohana\Request\Client\Internal.php(97): ReflectionMethod->invoke(Object(Controller_Pages))
+#6 Z:\home\ur.loc\www\system\classes\Kohana\Request\Client.php(114): Kohana_Request_Client_Internal->execute_request(Object(Request), Object(Response))
+#7 Z:\home\ur.loc\www\system\classes\Kohana\Request.php(997): Kohana_Request_Client->execute(Object(Request))
+#8 Z:\home\ur.loc\www\index.php(118): Kohana_Request->execute()
+#9 {main} in file:line
