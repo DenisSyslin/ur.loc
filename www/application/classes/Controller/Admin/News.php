@@ -48,7 +48,7 @@
 		 * Редактировать новость 
 		 */
 		public function action_edit() {
-			
+
 			$this -> grudEdit('Редактировать новость');
 		}
 	 

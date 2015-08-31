@@ -154,6 +154,8 @@
 		 */
 		protected function showPage($path, $data = array()) {
 		
+			View::set_global('TMP_PATH', self::TMP_PATH);
+			
 			$content = View::factory(self::TMP_PATH . '/' . $path, $data);
 
 			$menu = View::factory(self::TMP_PATH . '/block/menu');
@@ -169,7 +171,7 @@
 			}
 		
 			// Set content template
-			$this -> template -> set('TMP_PATH', self::TMP_PATH);
+			//$this -> template -> set('TMP_PATH', self::TMP_PATH);
 			$this -> template -> set('menu', $menu);
 			$this -> template -> set('footer', $footer);
 			$this -> template -> set('content', $html);

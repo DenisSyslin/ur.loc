@@ -1,18 +1,5 @@
-<?php defined('SYSPATH') or die('No direct script access.');
-
-	/**
-	 * @var array       $config      Global blog configuration
-	 * @var string      $title       Page Title
-	 * @var string      $author      Material author
-	 * @var string      $description Meta description tag content
-	 * @var string      $keywords    Meta keywords tag content
-	 * @var string|View $content     Page content
-	 *
-	 * @author     Syslin Denis <syslin@vand.ru>
-	 * @copyright  Copyrights (c) 2015 Syslin Denis
-	 */
- 
-?><!DOCTYPE html>
+<?php defined('SYSPATH') or die('No direct script access.'); ?>
+<!DOCTYPE html>
 <html>
     <head>
         <title><?php echo (isset($pagetitle) ? $pagetitle : '') ;  ?></title>
@@ -50,15 +37,33 @@
     </head>
 
     <body>
+	
+		<header class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+			<section class="container-fluid">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+						<span class="sr-only">Меню</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+					<h1>
+						<a class="navbar-brand" href="/">
+							<?php echo __(Config::getSiteParam('site_name')) ?>
+						</a>
+					</h1>	
+				</div>
+				<?php echo isset($menu) ? $menu : '' ?>
+			</section>
+		</header>
 
-		<section id="wrapper" class="container">
-			<?php echo isset($menu) ? $menu : '' ?>
+		<section class="main-container container">
 
 			<?php echo isset($content) ? $content : '' ?>
 
-			<?php echo isset($footer) ? $footer : '' ?>
-
 		</section> 
+
+		<?php echo isset($footer) ? $footer : '' ?>
 
         <!-- JS Code -->
         <script type="text/javascript" src="/asserts/<?php echo $TMP_PATH; ?>/js/jquery-1.10.2.min.js"></script>

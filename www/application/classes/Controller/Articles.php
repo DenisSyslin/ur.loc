@@ -26,6 +26,7 @@
 			parent::__construct($request, $response);
 		
 			$this -> model = Model::factory(UTF8::ucfirst($this -> cName));
+			$this -> pageModel = Model::factory('page');
 		}
 		
 		/**
@@ -36,7 +37,13 @@
 			$data = array();
 			$data[ 'current_page' ] = $this -> cName . 's';
 		
-			$this -> setParam('pagetitle', 'Список статей');
+			if (!$headers = $this -> pageModel -> getByType($data[ 'current_page' ])) {
+				
+				// 404	
+			}
+		
+			$data[ 'slogan' ] = $headers[ 'title' ];
+			$this -> setParam('pagetitle', $headers[ 'title' ]);
 			$this -> showPage($this -> cName . 's/list', $data);	
 		}
 	} 

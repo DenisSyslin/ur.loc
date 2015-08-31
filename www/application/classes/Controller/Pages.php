@@ -43,7 +43,13 @@
 			$data = array();
 			$data[ 'current_page' ] = 'main';
 		
-			$this -> setParam('pagetitle', 'Главная страница');
+			if (!$headers = $this -> model -> getByType($data[ 'current_page' ])) {
+				
+				// 404	
+			}
+			
+			$data[ 'slogan' ] = $headers[ 'title' ];
+			$this -> setParam('pagetitle', $headers[ 'title' ]);
 			$this -> showPage($this -> cName . 's/main', $data);	
 		}
 		
@@ -54,8 +60,14 @@
 		
 			$data = array();
 			$data[ 'current_page' ] = 'help';
-		
-			$this -> setParam('pagetitle', 'Помощь');
+			
+			if (!$headers = $this -> model -> getByType($data[ 'current_page' ])) {
+				
+				// 404	
+			}
+			
+			$data[ 'slogan' ] = $headers[ 'title' ];
+			$this -> setParam('pagetitle', $headers[ 'title' ]);
 			$this -> showPage($this -> cName . 's/help', $data);	
 		}
 		
@@ -67,7 +79,7 @@
 			$data = array();
 			$data[ 'current_page' ] = 'about';
 		
-			if (!$headers = $this -> model -> getByType('about')) {
+			if (!$headers = $this -> model -> getByType($data[ 'current_page' ])) {
 				
 				// 404	
 			}

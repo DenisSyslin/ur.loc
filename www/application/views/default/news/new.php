@@ -1,4 +1,3 @@
 <?php defined('SYSPATH') or die('No direct script access.');?>
-
-<p>New</p>
+<?php echo View::factory($TMP_PATH . '/block/header', array('slogan' => $slogan)); ?>
  
