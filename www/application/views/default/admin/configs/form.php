@@ -27,7 +27,7 @@
                 <div class="control-group<?php if (!empty($errors) AND Arr::get($errors, 'config_value')) : ?> error<?php endif; ?>">
 		            <label for="config_value" class="control-label"><?php echo __('Значение') ?>:</label>
 	                <div class="controls">
-	                    <input type="text" name="config_value" id="config_value" value="<?php echo Arr::get($item, 'config_value') ?>"/>
+	                    <input type="text" name="config_value" id="config_value" value="<?php echo str_replace('"', '&quot;', Arr::get($item, 'config_value')) ?>"/>
 						<?php if (!empty($errors) AND Arr::get($errors, 'config_value')) : ?>
 							<div class="help-block"><?php echo Arr::get($errors, 'config_value') ?></div>
 						<?php endif; ?>

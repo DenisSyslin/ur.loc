@@ -8,7 +8,7 @@
                 <div class="control-group<?php if (!empty($errors) AND Arr::get($errors, 'name')) : ?> error<?php endif; ?>">
 		            <label for="name" class="control-label"><?php echo __('Имя статьи') ?>:</label>
 	                <div class="controls">
-	                    <input type="text" name="name" id="name" class="span7" value="<?php echo Arr::get($item, 'name') ?>"/>
+	                    <input type="text" name="name" id="name" class="span7" value="<?php echo str_replace('"', '&quot;', Arr::get($item, 'name')) ?>"/>
 						<?php if (!empty($errors) AND Arr::get($errors, 'name')) : ?>
 							<div class="help-block"><?php echo Arr::get($errors, 'name') ?></div>
 						<?php endif; ?>
@@ -18,7 +18,7 @@
                 <div class="control-group<?php if (!empty($errors) AND Arr::get($errors, 'title')) : ?> error<?php endif; ?>">
 		            <label for="title" class="control-label"><?php echo __('Title окна') ?>:</label>
 	                <div class="controls">
-	                    <input type="text" name="title" id="title" class="span7" value="<?php echo Arr::get($item, 'title') ?>"/>
+	                    <input type="text" name="title" id="title" class="span7" value="<?php echo str_replace('"', '&quot;', Arr::get($item, 'title')) ?>"/>
 						<?php if (!empty($errors) AND Arr::get($errors, 'title')) : ?>
 							<div class="help-block"><?php echo Arr::get($errors, 'title') ?></div>
 						<?php endif; ?>
