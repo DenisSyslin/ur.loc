@@ -8,8 +8,8 @@
 	$page_start = max(1, $page_start);
 ?>
  
-<div class="pagination">
-    <ul>
+<div>
+    <ul class="pagination">
         <?php if ($first_page !== FALSE): ?>
             <li><a href="<?php echo HTML::chars($page -> url($first_page)) ?>"><?php echo __('Первая') ?></a></li>
         <?php endif ?>

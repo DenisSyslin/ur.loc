@@ -44,13 +44,14 @@
 		 * Получить статью
 		 *
 		 * @param int $article_id идентификатор статьи
+		 * @param bool $only_visible только видимая запись
 		 * @return array
 		 */
-		public function get($article_id) {
+		public function get($article_id, $only_visible = false) {
 		
 			$this -> columns = array('id', 'name', 'title', 'description', 'keywords', 'content', 'created', 'visible');
 
-			return parent::get($article_id);
+			return parent::get($article_id, $only_visible);
 		}
 	} 
 

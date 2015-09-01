@@ -88,9 +88,10 @@
 		 * Получить параметр
 		 *
 		 * @param int $param_id идентификатор параметра
+		 * @param bool $only_visible только видимая запись
 		 * @return array
 		 */
-		public function get($param_id) {
+		public function get($param_id, $only_visible = false) {
 		
 			$query = DB::select('id', 'config_key', 'config_ru_key', 'config_value')
 				-> from($this -> _table_name)

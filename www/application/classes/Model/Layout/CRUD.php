@@ -40,6 +40,7 @@
 				-> join(array('users', 'u')) -> on('u.id', '=', 't.user')
 				-> limit($itemsPerPage)
 				-> offset($offset)
+				-> order_by('t.created', 'DESC')
 				-> execute();
 			
 			if (count($query)) {
@@ -53,17 +54,24 @@
 		/**
 		 * Получить колличество записей
 		 *
-		 * @return array
+		 * @param bool $only_visible только видимая запись
+		 * @return int
 		 */
-		public function getCount() {
+		public function getCount($only_visible = false) {
 		
 			$query = DB::select(array(DB::expr('COUNT(id)'), 'count'))
-				-> from($this -> _table_name)
-				-> execute();
+				-> from($this -> _table_name);
 			
-			if (count($query)) {
+			if ($only_visible) {
 			
-				return $query -> get('count');
+				$query -> where('visible', '=', 'yes');
+			}
+			
+			$result = $query -> execute();
+			
+			if (count($result)) {
+			
+				return $result -> get('count');
 			}
 			
 			return FALSE;
@@ -73,21 +81,28 @@
 		 * Получить запись
 		 *
 		 * @param int $record_id идентификатор записи
+		 * @param bool $only_visible только видимая запись
 		 * @return array
 		 */
-		public function get($record_id) {
+		public function get($record_id, $only_visible = false) {
 		
 			$query = DB::select_array($this -> columns)
 				-> from($this -> _table_name)
 				-> where('id', '=', $record_id)
-				-> limit(1)
-				-> execute();
+				-> limit(1);
 			
-			if (count($query)) {
+			if ($only_visible) {
 			
-				$records = $query -> as_array();
+				$query -> where('visible', '=', 'yes');
+			}
 			
-				return array_pop($records);
+			$result = $query -> execute();
+			
+			if (count($result)) {
+			
+				$records = $result -> as_array();
+			
+				return current($records);
 			}
 			
 			return FALSE;

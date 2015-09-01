@@ -4,6 +4,13 @@ body {
 	color: #404144;
 	line-height: 17px;
 }
+a {
+	color: #404144;
+}
+a:focus, a:hover {
+    color: #FFC540;
+    text-decoration: underline;
+}
 .bold {
 	font-weight: bold;
 }
@@ -124,6 +131,23 @@ body {
 .about-tel {
     margin: 20px 0 90px 0;
     font-size: 25px;
+}
+#list-wrap .list-item {
+    margin-top: 20px;
+}
+#list-wrap .list-item .h4{
+	margin-bottom: 5px;
+}
+#item-wrap small, 
+#list-wrap .list-item small{
+    padding-bottom: 5px;
+    display: block;
+    font-style: italic;
+}
+#item-wrap img, 
+#list-wrap .list-item img{ 
+    width: 80px !important;
+    height: auto !important;
 }
 footer {
     background-color: #222;

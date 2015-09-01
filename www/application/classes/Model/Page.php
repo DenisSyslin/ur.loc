@@ -44,13 +44,14 @@
 		 * Получить страницу
 		 *
 		 * @param int $page_id идентификатор страницы
+		 * @param bool $only_visible только видимая запись
 		 * @return array
 		 */
-		public function get($page_id) {
+		public function get($page_id, $only_visible = false) {
 		
 			$this -> columns = array('id', 'type', 'title', 'description', 'keywords', 'content', 'created', 'visible');
 
-			return parent::get($page_id);
+			return parent::get($page_id, $only_visible);
 		}
 		
 		/**
