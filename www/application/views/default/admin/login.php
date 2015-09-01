@@ -13,7 +13,6 @@
 							<?php echo $errors[ 'common' ] ?>
 						</div>
 					<?php endif; ?>
-
                                 
 					<div class="control-group pull-right clearfix">
 						<?php if (isset($errors[ 'login' ])) : ?>

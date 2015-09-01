@@ -17,7 +17,7 @@ return array(
 		'current_page'      => array('source' => 'route', 'key' => 'id'), // source: "query_string" or "route"
 		'total_items'       => 0,
 		'items_per_page'    => 10,
-		'view'              => 'admin/block/pagination',
+		'view'              => 'default/admin/block/pagination',
 		'auto_hide'         => TRUE,
 		'first_page_in_url' => FALSE,
 	),

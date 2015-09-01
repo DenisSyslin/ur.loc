@@ -21,9 +21,12 @@
 		/**
 		 * Получить список статей
 		 *
+		 * @param int $itemsPerPage строк на странице
+		 * @param int $offset блок строк
+		 *
 		 * @return array
 		 */
-		public function getList() {
+		public function getList($itemsPerPage, $offset) {
 		
 			$this -> columns = array(
 				't.id', 
@@ -34,7 +37,7 @@
 				'u.username'
 			);
 		
-			return parent::getList();
+			return parent::getList($itemsPerPage, $offset);
 		}
 		
 		/**

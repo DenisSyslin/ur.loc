@@ -48,8 +48,11 @@
 				'total_items' => $this -> model -> getCount()
 			));
 			
+			$limit  = $this -> pagination -> items_per_page;
+			$offset = $this -> pagination -> offset;
+			
 			// Элементы страницы
-			$data[ 'items' ]      = $this -> model -> getList();
+			$data[ 'items' ]      = $this -> model -> getList($limit, $offset);
 
 			$data[ 'pagination' ] = $this -> pagination;
 			

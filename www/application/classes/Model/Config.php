@@ -34,12 +34,17 @@
 		/**
 		 * Получить параметры
 		 *
+		 * @param int $itemsPerPage строк на странице
+		 * @param int $offset блок строк
+		 *
 		 * @return array
 		 */
-		public function getList() {
+		public function getList($itemsPerPage, $offset) {
 		
 			$query = DB::select('id', 'config_key', 'config_ru_key', 'config_value')
 				-> from($this -> _table_name)
+				-> limit($itemsPerPage)
+				-> offset($offset)
 				-> execute();
 			
 			if (count($query)) {

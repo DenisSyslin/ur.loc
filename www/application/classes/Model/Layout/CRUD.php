@@ -28,13 +28,18 @@
 		/**
 		 * Получить список
 		 *
+		 * @param int $itemsPerPage строк на странице
+		 * @param int $offset блок строк
+		 *
 		 * @return array
 		 */
-		public function getList() {
+		public function getList($itemsPerPage, $offset) {
 		
 			$query = DB::select_array($this -> columns)
 				-> from(array($this -> _table_name, 't'))
 				-> join(array('users', 'u')) -> on('u.id', '=', 't.user')
+				-> limit($itemsPerPage)
+				-> offset($offset)
 				-> execute();
 			
 			if (count($query)) {
