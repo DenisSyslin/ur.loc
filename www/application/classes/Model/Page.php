@@ -92,6 +92,45 @@
 			
 			return FALSE;		
 		}
+		
+		/**
+		 * Поиск слова
+		 *
+		 * @param string $word искомое слово
+		 * @return array
+		 */
+		public function search($word) {
+			$query = DB::query(Database::SELECT, 'SELECT SQL_CALC_FOUND_ROWS *
+				FROM (
+					(
+						SELECT 
+							MATCH (name, title, content) AGAINST ("свободы") AS Relevance, id, name, title, description, keywords, content, created, \'news\' AS type 
+						FROM `news` 
+						WHERE 
+							MATCH (name, title, content) AGAINST ("свободы")
+							AND visible = \'yes\' 
+					)
+					UNION
+					(
+						SELECT 
+							MATCH (name, title, content) AGAINST ("свободы") AS Relevance, id, name, title, description, keywords, content, created, \'articles\' AS type  
+						FROM `articles` 
+						WHERE 
+							MATCH (name, title, content) AGAINST ("свободы")
+							AND visible = \'yes\' 
+					)
+				) AS q
+				ORDER BY Relevance DESC');
+				
+			$result = $query -> execute();
+			
+			if (count($result)) {
+			
+				return $result -> as_array();
+			}
+			
+			return FALSE;	
+		}
 	} 
 
     /* End of file Page.php */

@@ -18,7 +18,7 @@
 			<a href="<?php echo URL::site('/pages/about') ?>">О нас</a>
 		</li>
 	</ul>
-	<form class="navbar-form navbar-right">
-		<input type="text" class="form-control" placeholder="Поиск..."/>
+	<form class="navbar-form navbar-right" action="<?php echo URL::site('/pages/search') ?>" method="POST">
+		<input id="site-search-text" name="query" type="text" class="form-control" placeholder="Поиск..."/>
 	</form>
 </nav>

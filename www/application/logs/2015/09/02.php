@@ -56,3 +56,40 @@
 #6 Z:\home\ur.loc\www\system\classes\Kohana\Request.php(997): Kohana_Request_Client->execute(Object(Request))
 #7 Z:\home\ur.loc\www\index.php(118): Kohana_Request->execute()
 #8 {main} in Z:\home\ur.loc\www\application\classes\Controller\Layout\SiteGRUD.php:92
+2015-09-02 15:06:49 --- CRITICAL: ErrorException [ 4 ]: syntax error, unexpected '':developer'' (T_CONSTANT_ENCAPSED_STRING), expecting ')' ~ APPPATH\views\default\block\footer.php [ 7 ] in file:line
+2015-09-02 15:06:49 --- DEBUG: #0 [internal function]: Kohana_Core::shutdown_handler()
+#1 {main} in file:line
+2015-09-02 16:50:25 --- CRITICAL: ErrorException [ 2 ]: trim() expects parameter 1 to be string, array given ~ APPPATH\classes\Controller\Pages.php [ 157 ] in file:line
+2015-09-02 16:50:25 --- DEBUG: #0 [internal function]: Kohana_Core::error_handler(2, 'trim() expects ...', 'Z:\\home\\ur.loc\\...', 157, Array)
+#1 Z:\home\ur.loc\www\application\classes\Controller\Pages.php(157): trim(Array)
+#2 Z:\home\ur.loc\www\system\classes\Kohana\Controller.php(84): Controller_Pages->action_search()
+#3 [internal function]: Kohana_Controller->execute()
+#4 Z:\home\ur.loc\www\system\classes\Kohana\Request\Client\Internal.php(97): ReflectionMethod->invoke(Object(Controller_Pages))
+#5 Z:\home\ur.loc\www\system\classes\Kohana\Request\Client.php(114): Kohana_Request_Client_Internal->execute_request(Object(Request), Object(Response))
+#6 Z:\home\ur.loc\www\system\classes\Kohana\Request.php(997): Kohana_Request_Client->execute(Object(Request))
+#7 Z:\home\ur.loc\www\index.php(118): Kohana_Request->execute()
+#8 {main} in file:line
+2015-09-02 16:51:00 --- CRITICAL: ErrorException [ 8 ]: Undefined index: query ~ APPPATH\classes\Controller\Pages.php [ 157 ] in Z:\home\ur.loc\www\application\classes\Controller\Pages.php:157
+2015-09-02 16:51:00 --- DEBUG: #0 Z:\home\ur.loc\www\application\classes\Controller\Pages.php(157): Kohana_Core::error_handler(8, 'Undefined index...', 'Z:\\home\\ur.loc\\...', 157, Array)
+#1 Z:\home\ur.loc\www\system\classes\Kohana\Controller.php(84): Controller_Pages->action_search()
+#2 [internal function]: Kohana_Controller->execute()
+#3 Z:\home\ur.loc\www\system\classes\Kohana\Request\Client\Internal.php(97): ReflectionMethod->invoke(Object(Controller_Pages))
+#4 Z:\home\ur.loc\www\system\classes\Kohana\Request\Client.php(114): Kohana_Request_Client_Internal->execute_request(Object(Request), Object(Response))
+#5 Z:\home\ur.loc\www\system\classes\Kohana\Request.php(997): Kohana_Request_Client->execute(Object(Request))
+#6 Z:\home\ur.loc\www\index.php(118): Kohana_Request->execute()
+#7 {main} in Z:\home\ur.loc\www\application\classes\Controller\Pages.php:157
+2015-09-02 16:51:35 --- CRITICAL: ErrorException [ 8 ]: Undefined index: query ~ APPPATH\classes\Controller\Pages.php [ 157 ] in Z:\home\ur.loc\www\application\classes\Controller\Pages.php:157
+2015-09-02 16:51:35 --- DEBUG: #0 Z:\home\ur.loc\www\application\classes\Controller\Pages.php(157): Kohana_Core::error_handler(8, 'Undefined index...', 'Z:\\home\\ur.loc\\...', 157, Array)
+#1 Z:\home\ur.loc\www\system\classes\Kohana\Controller.php(84): Controller_Pages->action_search()
+#2 [internal function]: Kohana_Controller->execute()
+#3 Z:\home\ur.loc\www\system\classes\Kohana\Request\Client\Internal.php(97): ReflectionMethod->invoke(Object(Controller_Pages))
+#4 Z:\home\ur.loc\www\system\classes\Kohana\Request\Client.php(114): Kohana_Request_Client_Internal->execute_request(Object(Request), Object(Response))
+#5 Z:\home\ur.loc\www\system\classes\Kohana\Request.php(997): Kohana_Request_Client->execute(Object(Request))
+#6 Z:\home\ur.loc\www\index.php(118): Kohana_Request->execute()
+#7 {main} in Z:\home\ur.loc\www\application\classes\Controller\Pages.php:157
+2015-09-02 18:02:16 --- CRITICAL: ErrorException [ 1 ]: Call to undefined method DB::quote_column() ~ APPPATH\classes\Controller\Pages.php [ 160 ] in file:line
+2015-09-02 18:02:16 --- DEBUG: #0 [internal function]: Kohana_Core::shutdown_handler()
+#1 {main} in file:line
+2015-09-02 18:02:44 --- CRITICAL: ErrorException [ 1 ]: Call to undefined method DB::escape() ~ APPPATH\classes\Controller\Pages.php [ 160 ] in file:line
+2015-09-02 18:02:44 --- DEBUG: #0 [internal function]: Kohana_Core::shutdown_handler()
+#1 {main} in file:line

@@ -143,6 +143,43 @@
 		}
 		
 		/**
+		 * Поиск по сайту
+		 */
+		public function action_search() {
+		
+			$data = array();
+			$data[ 'current_page' ] = 'search';
+			
+			if ($this -> request -> method() === Request::POST) {
+
+				$post = $this -> request -> post();
+				
+				$query = trim($post[ 'query' ]);
+				$query = preg_replace('~[\<\>\/\\\+\'\"\*\+,]+~sui', '', $query);
+				$query = filter_var($query, FILTER_SANITIZE_STRING);
+				$query = filter_var($query, FILTER_SANITIZE_SPECIAL_CHARS);
+				
+				Session::instance() -> set('searchWord', $query);
+			
+				// Чистим форму
+				HTTP::redirect(URL::site('/pages/search'));	
+			}
+			
+			if (!$headers = $this -> model -> getByType($data[ 'current_page' ])) {
+				
+				throw new HTTP_Exception_404('Страница не найдена.');
+			}
+			
+			$data[ 'searchWord' ] = Session::instance() -> get('searchWord');
+				
+			$data[ 'text' ]   = $headers[ 'content' ];
+			$data[ 'slogan' ] = $headers[ 'name' ];
+			
+			$this -> setPageParams($headers);
+			$this -> showPage($this -> cName . 's/search', $data);	
+		}
+		
+		/**
 		 * Страница
 		 */
 		public function action_show() {

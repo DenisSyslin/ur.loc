@@ -9,7 +9,7 @@
         <link rel="shortcut icon" href="/favicon.png" type="image/png"/>
 
         <!-- System -->
-        <meta name="author" content="Денис Суслин (programist1985@gmail.com)" />
+        <meta name="author" content="<?php echo __(Config::getSiteParam('site_developer')); ?>" />
         <meta name="description" content="<?php echo isset($description) ? $description : ''; ?>" />
         <meta name="keywords" content="<?php echo isset($keywords) ? $keywords : ''; ?>" />
 		

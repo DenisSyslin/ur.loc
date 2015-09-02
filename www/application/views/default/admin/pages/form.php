@@ -16,6 +16,7 @@
 							<option <?php if ($type == 'news')     : echo 'selected="selected"'; endif;?> value="news">Новости</option>
 							<option <?php if ($type == 'help')     : echo 'selected="selected"'; endif;?> value="help">Помощь</option>
 							<option <?php if ($type == 'about')    : echo 'selected="selected"'; endif;?> value="about">О нас</option>
+							<option <?php if ($type == 'search')   : echo 'selected="selected"'; endif;?> value="search">Поиск</option>
 							<option <?php if ($type == 'other')    : echo 'selected="selected"'; endif;?> value="other">Другое</option>
 						</select>
 						<?php if (!empty($errors) AND Arr::get($errors, 'type')) : ?>

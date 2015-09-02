@@ -3,7 +3,13 @@
 	<div class="container">
 		<div class="row">
 			<div class="span12">
-                <?php echo __('&copy; :date Cyber Applications. Developer: Syslin Denis.', array(':date' => Date::formatted_time('now', 'Y'))) ?>
+                <?php echo __('&copy; :date Cyber Applications. Developer: :developer.', 
+						array(
+							':date' => Date::formatted_time('now', 'Y'),
+							':developer' => Config::getSiteParam('site_developer')
+						)
+					); 
+				?>
             </div>
         </div>
     </div>

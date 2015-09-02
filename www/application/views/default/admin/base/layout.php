@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title><?php echo Config::getSiteParam('site_name') . '::' . (isset($pagetitle) ? $pagetitle : '') ;  ?></title>
+        <title><?php echo strip_tags(Config::getSiteParam('site_name')) . '::' . (isset($pagetitle) ? $pagetitle : '') ;  ?></title>
 
         <!-- Base URL -->
         <base href="<?php echo URL::base(true, false) ?>">

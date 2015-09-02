@@ -164,9 +164,9 @@
 				$this -> template -> set('description', $data[ 'description' ]);
 			}
 		
-			if (!empty($data[ 'pagetitle' ])) {
+			if (!empty($data[ 'title' ])) {
 			
-				$this -> template -> set('pagetitle', $data[ 'pagetitle' ]);
+				$this -> template -> set('pagetitle', $data[ 'title' ]);
 			}
 		}
 		
