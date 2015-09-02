@@ -150,6 +150,13 @@
 			$data = array();
 			$data[ 'current_page' ] = 'search';
 			
+			$pageNum = $this -> request -> param('id');
+			
+			if (empty($pageNum)) {
+			
+				$pageNum = 1;
+			}
+			
 			if ($this -> request -> method() === Request::POST) {
 
 				$post = $this -> request -> post();
@@ -170,8 +177,22 @@
 				throw new HTTP_Exception_404('Страница не найдена.');
 			}
 			
-			$data[ 'searchWord' ] = Session::instance() -> get('searchWord');
-				
+			$searchWord = Session::instance() -> get('searchWord');
+
+			// Подключить постраничную навигацию			
+			$this -> pagination	= Pagination::factory();
+			
+			$limit  = $this -> pagination -> items_per_page;
+			$offset = $this -> pagination -> offset;
+			
+			// Элементы страницы
+			$data[ 'items' ] = $this -> model -> search($limit, $offset);
+			
+			$this -> pagination -> total_items = $this -> model -> foundRows();
+			
+			$data[ 'pagination' ] = $this -> pagination;
+			$data[ 'searchWord' ] = $searchWord;
+			
 			$data[ 'text' ]   = $headers[ 'content' ];
 			$data[ 'slogan' ] = $headers[ 'name' ];
 			

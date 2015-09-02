@@ -93,3 +93,6 @@
 2015-09-02 18:02:44 --- CRITICAL: ErrorException [ 1 ]: Call to undefined method DB::escape() ~ APPPATH\classes\Controller\Pages.php [ 160 ] in file:line
 2015-09-02 18:02:44 --- DEBUG: #0 [internal function]: Kohana_Core::shutdown_handler()
 #1 {main} in file:line
+2015-09-02 18:48:05 --- CRITICAL: ErrorException [ 1 ]: Call to a member function as_array() on a non-object ~ APPPATH\classes\Model\Layout\CRUD.php [ 152 ] in file:line
+2015-09-02 18:48:05 --- DEBUG: #0 [internal function]: Kohana_Core::shutdown_handler()
+#1 {main} in file:line

@@ -137,6 +137,27 @@
 		}
 		
 		/**
+		 * Получить количество найденых строк 
+		 *
+		 * @return array
+		 */
+		public function foundRows() {
+		
+			$result = DB::query(Database::SELECT, "SELECT FOUND_ROWS() AS 'count'") 
+				-> execute()
+				-> as_array();
+			
+			if (count($result)) {
+			
+				$row = current($result);
+				
+				return $row[ 'count' ];
+			}
+			
+			return FALSE;
+		}
+		
+		/**
 		 * Сохранить запись
 		 *
 		 * @param int $record_id идентификатор записи
