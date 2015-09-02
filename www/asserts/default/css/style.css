@@ -90,10 +90,16 @@ a:focus, a:hover {
 .main-new-block .text-block{
 	margin-top: 15px;
 }
+.list-item .main-read-more,
 .main-new-block .main-read-more{
 	font-size: 11px;
 	text-transform: uppercase;
 	color: #FFB400;
+}
+.read-more-wrap{
+    text-align: right;
+    padding: 0;
+    margin: 0;
 }
 .kons-banner {
 	background-color: #FFB400;

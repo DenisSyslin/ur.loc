@@ -12,6 +12,9 @@
 				<article>
 					<?php $content = explode('<div style="page-break-after: always;"><span style="display: none;">&nbsp;</span></div>', $item[ 'content' ]); ?>
 					<?php echo current($content); ?>
+					<p class="read-more-wrap">
+						<a href="<?php echo URL::site('news/show/' . $item[ 'id' ]) ?>" class="main-read-more">Подробнее ...</a>
+					</p>
 					<div class="clearfix"></div>
 				</article>
 			</div>
