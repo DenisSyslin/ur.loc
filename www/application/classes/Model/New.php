@@ -76,6 +76,19 @@
 		
 			return parent::getVisibleList($itemsPerPage, $offset);
 		}
+		
+		/**
+		 * Получить список последних новостей
+		 *
+		 * @param int $limit количество строк
+		 * @param int $offset блок строк
+		 *
+		 * @return array
+		 */
+		public function getLastNews($limit) {
+		
+			return $this -> getVisibleList($limit, 0);
+		}
 	} 
 
     /* End of file New.php */

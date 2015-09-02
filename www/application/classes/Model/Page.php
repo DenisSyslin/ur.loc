@@ -31,6 +31,8 @@
 			$this -> columns = array(
 				't.id', 
 				't.type', 
+				't.name', 
+				't.title', 
 				't.created', 
 				't.visible', 
 				't.action', 
@@ -49,7 +51,7 @@
 		 */
 		public function get($page_id, $only_visible = false) {
 		
-			$this -> columns = array('id', 'type', 'title', 'description', 'keywords', 'content', 'created', 'visible');
+			$this -> columns = array('id', 'type', 'name', 'title', 'description', 'keywords', 'content', 'created', 'visible');
 
 			return parent::get($page_id, $only_visible);
 		}
@@ -60,22 +62,32 @@
 		 * @param string $type тип страницы
 		 * @return array
 		 */
-		public function getByType($type) {
+		public function getByType($type, $asList = false) {
 		
-			$this -> columns = array('id', 'type', 'title', 'description', 'keywords', 'content', 'created', 'visible');
+			$this -> columns = array('id', 'type', 'name', 'title', 'description', 'keywords', 'content', 'created', 'visible');
 			
 			$query = DB::select_array($this -> columns)
 				-> from($this -> _table_name)
 				-> where('type', '=', $type)
-				-> where('visible', '=', 'yes')
-				-> limit(1)
-				-> execute();
+				-> where('visible', '=', 'yes');
 			
-			if (count($query)) {
+			if (!$asList) {
 			
-				$records = $query -> as_array();
+				$query -> limit(1);
+			}
 			
-				return array_pop($records);
+			$result = $query -> execute();
+			
+			if (count($result)) {
+			
+				$records = $result -> as_array();
+			
+				if ($asList) {
+				
+					return $records;
+				}
+			
+				return current($records);
 			}
 			
 			return FALSE;		

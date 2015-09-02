@@ -3,20 +3,16 @@
 <?php echo View::factory($TMP_PATH . '/block/carousel'); ?>
 
 <div class="row main-row">
-	<div class="col-lg-4">
-		<h5 class="sub-h5">Наша команда</h5>
-		<p class="top-buffer">Это текст. Нажмите здесь, чтобы отредактировать его и добавить свой текст. Сделать это просто: нажмите «Редактировать текст» либо дважды нажмите на сам текст – и можете вставлять свое содержимое и задавать шрифт.</p>
-		<p>Здесь замечательно будет смотреться длинный текст о вашей компании и тех услугах, которые вы предоставляете. Все это место можно использовать, чтобы более подробно описать вашу компанию.</p>
-		<p><a class="btn btn-primary btn-black" href="#" role="button">Подробнее</a></p>
-	</div>
-	<div class="col-lg-4">
-		<h5 class="sub-h5">Услуги</h5>
-		<p class="top-buffer">Это текст. Нажмите здесь, чтобы отредактировать его и добавить свой текст. Сделать это просто: нажмите «Редактировать текст» либо дважды нажмите на сам текст – и можете вставлять свое содержимое и задавать шрифт.</p>
-		<p>Здесь замечательно будет смотреться длинный текст о вашей компании и тех услугах, которые вы предоставляете. Все это место можно использовать, чтобы более подробно описать вашу компанию.</p>
-		<p> 
-			<a class="btn btn-primary btn-black" href="#" role="button">Подробнее</a>
-		</p>
-	</div>
+	<?php foreach($otherPages as $item) : ?>
+		<div class="col-lg-4">
+			<h5 class="sub-h5"><?php echo $item[ 'title' ]; ?></h5>
+			<div class="top-buffer">
+				<?php $content = explode(Config::getSiteParam('pagebreak'), $item[ 'content' ]); ?>
+				<?php echo current($content); ?>
+			</div>
+			<p><a class="btn btn-primary btn-black" href="<?php echo URL::site('pages/show/' . $item[ 'id' ]) ?>" role="button">Подробнее</a></p>
+		</div>
+	<?php endforeach; ?>
 	<div class="col-lg-4 kons-banner">
 		<h5>Запишитесь</h5>
 		<h6>на бесплатную консультацию</h6>
@@ -29,36 +25,24 @@
 <div class="row main-row">
 	<div class="col-lg-8">
 		<h5 class="sub-h5">Новости и публикации</h5>
-		<div class="main-new-block">
-			<div class="left-block">
-				<img src="/uploads/news/new1.jpg"/>
-			</div>
-			<div class="right-block">
-				<p class="date-block">25.10.2023</p>
-				<div>
-					<p>Это текст. Нажмите здесь, чтобы отредактировать его и добавить свой текст. Сделать это просто: нажмите «Редактировать текст» либо дважды нажмите на сам текст – и можете вставлять свое содержимое и задавать шрифт. Если хотите, его можно перетащить в любое место на странице. Это место отлично подходит, чтобы рассказать пользователям о себе.</p>
+		<?php if (!empty($lastNews)) : ?>
+			<?php foreach($lastNews as $item) : ?>
+				<div class="main-new-block">
+					<h4 class="h4">
+						<a href="<?php echo URL::site('news/show/' . $item[ 'id' ]) ?>" title="<?php echo $item[ 'name' ]; ?>"><?php echo $item[ 'name' ]; ?></a>
+					</h4>
+					<small><?php echo Date::formatted_time($item[ 'created' ], 'd-m-Y H:i'); ?></small>
+					<article>
+						<?php $content = explode(Config::getSiteParam('pagebreak'), $item[ 'content' ]); ?>
+						<?php echo current($content); ?>
+						<p class="read-more-wrap">
+							<a href="<?php echo URL::site('news/show/' . $item[ 'id' ]) ?>" class="main-read-more">Подробнее ...</a>
+						</p>
+						<div class="clearfix"></div>
+					</article>
 				</div>
-				<p class="read-more-wrap">
-					<a href="#" class="main-read-more">Подробнее ...</a>
-				</p>
-			</div>
-			<div class="clearfix"></div>
-		</div>
-		<div class="main-new-block">
-			<div class="left-block">
-				<img width="130px" src="/uploads/news/new2.jpg"/>
-			</div>
-			<div class="right-block">
-				<p class="date-block">25.10.2023</p>
-				<div class="text-block">
-					<p>Это текст. Нажмите здесь, чтобы отредактировать его и добавить свой текст. Сделать это просто: нажмите «Редактировать текст» либо дважды нажмите на сам текст – и можете вставлять свое содержимое и задавать шрифт. Если хотите, его можно перетащить в любое место на странице. Это место отлично подходит, чтобы рассказать пользователям о себе.</p>
-				</div>
-				<p class="read-more-wrap">
-					<a href="#" class="main-read-more">Подробнее ...</a>
-				</p>
-			</div>
-			<div class="clearfix"></div>
-		</div>
+			<?php endforeach; ?>
+		<?php endif; ?>
 	</div>	
 	<div class="col-lg-4">
 		<h5 class="sub-h5">Отрасли</h5>

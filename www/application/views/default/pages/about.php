@@ -1,14 +1,10 @@
 <?php defined('SYSPATH') or die('No direct script access.'); ?>
 <?php echo View::factory($TMP_PATH . '/block/header', array('slogan' => $slogan)); ?>
 
-
 <div class="row">
 	<div class="col-lg-8">
 		<h5 class="sub-h5">История</h5>
-		<div class="page-text">
-			<p>С 2005 года портал Предание.ру помогает людям познакомиться со Словом Божьим, с творениями подвижников и мыслителей прошлого и современности. Важным двигателем нашей работы является желание поделиться с вами теми замечательными материалами, которые мы для себя открыли. Мы постоянно пополняем библиотеку, аудио и видеоархивы новыми материалами. </p>
-			<p>Четыре года назад на нашем портале мы начали собирать средства для нуждающихся в помощи людей. Тогда же мы зарегистрировали благотворительный фонд «Предание». Согласно уставу фонда, мы помогаем людям независимо от гражданства, возраста, вероисповедания и той беды, которая с ними случилась, будь это болезнь близкого человека, наводнение, пожар, тяжелые жилищные условия или что-либо другое. Мы оказываем адресную конкретную помощь и постоянно публикуем отчеты о каждом потраченном на это дело рубле. Подробнее о принципах нашей работы можно узнать в разделе "о фонде". </p>
-		</div>
+		<div class="page-text"><?php echo $text; ?></div>
 		<h5 class="sub-h5">Адрес:</h5>
 		<div class="office-addr">
 			<?php echo __(Config::getSiteParam('site_addr')) ?>
@@ -18,7 +14,7 @@
 	<div class="col-lg-4">
 		<h5 class="sub-h5 color_17">Телефон:</h5>
 		<p class="about-tel color_17"><?php echo __(Config::getSiteParam('site_tel')) ?></p>
-		<form class="form-horizontal" action="" method="post" id="contact_form">
+		<form id="contact_form" class="form-horizontal" method="POST" data-toggle="validator">
 			
 			<!-- Success message -->
 			<?php if (!empty($message) and $message_type == 'success') : ?>
@@ -29,7 +25,7 @@
 				<div class="col-md-12 inputGroupContainer">
 					<div class="input-group">
 						<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-						<input type="text" name="name" class="form-control" value="<?php echo Arr::get($item, 'name') ?>" placeholder="Ваше ФИО"/>
+						<input type="text" name="name" class="form-control" value="<?php echo Arr::get($item, 'name') ?>" pattern="^[а-яё\d\-\_\s]+$" maxlength="64" placeholder="Ваше ФИО" required/>
 					</div>
 					<?php if (!empty($errors) AND Arr::get($errors, 'name')) : ?>
 						<p class="text-danger">
@@ -44,7 +40,7 @@
 				<div class="col-md-12 inputGroupContainer">
 					<div class="input-group">
 						<span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
-						<input name="email" type="text" class="form-control" value="<?php echo Arr::get($item, 'email') ?>" placeholder="Ваш email"/>
+						<input name="email" type="text" class="form-control" value="<?php echo Arr::get($item, 'email') ?>" pattern="^[_A-z0-9]{1,}$" maxlength="64" placeholder="Ваш email" required/>
 					</div>
 					<?php if (!empty($errors) AND Arr::get($errors, 'email')) : ?>
 						<p class="text-danger">

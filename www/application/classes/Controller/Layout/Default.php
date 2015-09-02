@@ -149,6 +149,30 @@
 		/**
 		 * Отобразить пользовательскую страницу 
 		 *
+		 * @param array  $data пераметры страницы
+		 * @param string $path путь к шаблону 
+		 */
+		protected function setPageParams($data = array()) {
+		
+			if (!empty($data[ 'keywords' ])) {
+			
+				$this -> template -> set('keywords', $data[ 'keywords' ]);
+			}		
+			
+			if (!empty($data[ 'description' ])) {
+			
+				$this -> template -> set('description', $data[ 'description' ]);
+			}
+		
+			if (!empty($data[ 'pagetitle' ])) {
+			
+				$this -> template -> set('pagetitle', $data[ 'pagetitle' ]);
+			}
+		}
+		
+		/**
+		 * Отобразить пользовательскую страницу 
+		 *
 		 * @param string $path путь к шаблону 
 		 * @param array  $data данные для шаблона
 		 */
@@ -164,12 +188,7 @@
 			$footer = View::factory(self::TMP_PATH . '/block/footer');
 			
 			$html = $content;
-		
-			if (!empty($data[ 'pagetitle' ])) {
-			
-				$this -> template -> set('pagetitle', $data[ 'pagetitle' ]);
-			}
-		
+
 			// Set content template
 			//$this -> template -> set('TMP_PATH', self::TMP_PATH);
 			$this -> template -> set('menu', $menu);

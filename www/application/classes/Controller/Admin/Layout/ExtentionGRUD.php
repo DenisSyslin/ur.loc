@@ -164,10 +164,10 @@
 				$data[ 'content' ] =  preg_replace('~[\t\r\n]+~siu', '', $data[ 'content' ]);
 				$data[ 'content' ] =  preg_replace('~[\s]{2,}~siu', ' ', $data[ 'content' ]);
 				
-				//if (empty($record_id)) {
+				if (empty($record_id)) {
 					
 					$data[ 'created' ] = date('Y-m-d H:i:s');
-				//}
+				}
 				
 				$data[ 'user' ] = Auth::instance() -> get_user() -> id;
 	 

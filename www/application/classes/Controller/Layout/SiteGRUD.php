@@ -27,6 +27,8 @@
 		
 		/**
 		 * Список записей
+		 * 
+		 * @throw HTTP_Exception_404
 		 */
 		public function grudIndex() {
 		
@@ -35,7 +37,7 @@
 		
 			if (!$headers = $this -> pageModel -> getByType($data[ 'current_page' ])) {
 				
-				// 404	
+				throw new HTTP_Exception_404('Страница не найдена.');
 			}
 
 			$pageNum = $this -> request -> param('id');
@@ -58,8 +60,9 @@
 			$data[ 'items' ]      = $this -> model -> getVisibleList($limit, $offset);
 			$data[ 'pagination' ] = $this -> pagination;
 		
-			$data[ 'slogan' ] = $headers[ 'title' ];
-			$this -> setParam('pagetitle', $headers[ 'title' ]);
+			$data[ 'slogan' ] = $headers[ 'name' ];
+			
+			$this -> setPageParams($headers);
 			$this -> showPage($this -> cName . 's/list', $data);	
 		}
 		
@@ -88,7 +91,8 @@
 			
 			$data[ 'item' ]   = $record;
 			$data[ 'slogan' ] = $record[ 'name' ];
-			$this -> setParam('pagetitle', $record[ 'title' ]);
+			
+			$this -> setPageParams($record);
 			$this -> showPage($this -> cName . 's/show', $data);	
 		}
 	} 

@@ -92,6 +92,7 @@
 			$post = Validation::factory($post)
 				-> labels(array(
 					'type'        => __('Тип страницы'),
+					'name'        => __('Имя страницы'),
 					'title'       => __('Title окна'),
 					'content'     => __('Контент'),
 					'description' => __('Описнаие'),
@@ -99,6 +100,7 @@
 					'visible'     => __('Видимость'),
 				))
 				-> rule('type', 'not_empty')
+				-> rule('name', 'not_empty')
 				-> rule('type', 'regex', array(':value', '~^[a-z]+$~ui'))
 				-> rule('title', 'not_empty');
 				

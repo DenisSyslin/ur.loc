@@ -9,7 +9,7 @@
 	 * @author      Суслин Денис 2015г. <programist1985@gmail.com>
 	 */
 	 
-	class Controller_Pages extends Controller_Layout_Default {
+	class Controller_Pages extends Controller_Layout_SiteGRUD {
 	
 		/**
 		 * Основная модель
@@ -17,6 +17,13 @@
 		 * @property string
 		 */
 		protected $model;
+	
+		/**
+		 * Модель новостей
+		 * @access protected
+		 * @property string
+		 */
+		protected $newsModel;
 		
 		/**
 		 * Имя контроллера в единственном числе
@@ -33,6 +40,7 @@
 			parent::__construct($request, $response);
 		
 			$this -> model = Model::factory(UTF8::ucfirst($this -> cName));
+			$this -> newsModel = Model::factory('New');
 		}
 		
 		/**
@@ -45,11 +53,15 @@
 		
 			if (!$headers = $this -> model -> getByType($data[ 'current_page' ])) {
 				
-				// 404	
+				throw new HTTP_Exception_404('Страница не найдена.');
 			}
 			
-			$data[ 'slogan' ] = $headers[ 'title' ];
-			$this -> setParam('pagetitle', $headers[ 'title' ]);
+			$data[ 'lastNews' ]   = $this -> newsModel -> getLastNews(2);
+			$data[ 'otherPages' ] = $this -> model -> getByType('other', true);
+			
+			$data[ 'slogan' ] = $headers[ 'name' ];
+			
+			$this -> setPageParams($headers);
 			$this -> showPage($this -> cName . 's/main', $data);	
 		}
 		
@@ -63,11 +75,13 @@
 			
 			if (!$headers = $this -> model -> getByType($data[ 'current_page' ])) {
 				
-				// 404	
+				throw new HTTP_Exception_404('Страница не найдена.');
 			}
 			
-			$data[ 'slogan' ] = $headers[ 'title' ];
-			$this -> setParam('pagetitle', $headers[ 'title' ]);
+			$data[ 'text' ]   = $headers[ 'content' ];
+			$data[ 'slogan' ] = $headers[ 'name' ];
+			
+			$this -> setPageParams($headers);
 			$this -> showPage($this -> cName . 's/help', $data);	
 		}
 		
@@ -81,7 +95,7 @@
 		
 			if (!$headers = $this -> model -> getByType($data[ 'current_page' ])) {
 				
-				// 404	
+				throw new HTTP_Exception_404('Страница не найдена.');
 			}
 		
 			$item = array();
@@ -121,9 +135,19 @@
 			$data[ 'message_type' ] = Session::instance() -> get_once('message_type');
 		
 			$data[ 'item' ]   = $item;
-			$data[ 'slogan' ] = $headers[ 'title' ];
-			$this -> setParam('pagetitle', $headers[ 'title' ]);
+			$data[ 'text' ]   = $headers[ 'content' ];
+			$data[ 'slogan' ] = $headers[ 'name' ];
+			
+			$this -> setPageParams($headers);
 			$this -> showPage($this -> cName . 's/about', $data);	
+		}
+		
+		/**
+		 * Страница
+		 */
+		public function action_show() {
+		
+			$this -> grudShow();
 		}
 		
 		/**

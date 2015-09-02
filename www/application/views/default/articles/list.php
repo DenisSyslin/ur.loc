@@ -10,7 +10,7 @@
 				</h4>
 				<small><?php echo Date::formatted_time($item[ 'created' ], 'd-m-Y H:i'); ?></small>
 				<article>
-					<?php $content = explode('<div style="page-break-after: always;"><span style="display: none;">&nbsp;</span></div>', $item[ 'content' ]); ?>
+					<?php $content = explode(Config::getSiteParam('pagebreak'), $item[ 'content' ]); ?>
 					<?php echo current($content); ?>
 					<p class="read-more-wrap">
 						<a href="<?php echo URL::site('articles/show/' . $item[ 'id' ]) ?>" class="main-read-more">Подробнее ...</a>

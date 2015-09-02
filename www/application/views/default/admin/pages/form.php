@@ -16,13 +16,24 @@
 							<option <?php if ($type == 'news')     : echo 'selected="selected"'; endif;?> value="news">Новости</option>
 							<option <?php if ($type == 'help')     : echo 'selected="selected"'; endif;?> value="help">Помощь</option>
 							<option <?php if ($type == 'about')    : echo 'selected="selected"'; endif;?> value="about">О нас</option>
+							<option <?php if ($type == 'other')    : echo 'selected="selected"'; endif;?> value="other">Другое</option>
 						</select>
 						<?php if (!empty($errors) AND Arr::get($errors, 'type')) : ?>
 							<div class="help-block"><?php echo Arr::get($errors, 'type') ?></div>
 						<?php endif; ?>
 	                </div>
 	            </div>
-
+				
+                <div class="control-group<?php if (!empty($errors) AND Arr::get($errors, 'name')) : ?> error<?php endif; ?>">
+		            <label for="name" class="control-label"><?php echo __('Имя страницы') ?>:</label>
+	                <div class="controls">
+	                    <input type="text" name="name" id="name" class="span7" value="<?php echo str_replace('"', '&quot;', Arr::get($item, 'name')) ?>"/>
+						<?php if (!empty($errors) AND Arr::get($errors, 'name')) : ?>
+							<div class="help-block"><?php echo Arr::get($errors, 'name') ?></div>
+						<?php endif; ?>
+	                </div>
+	            </div>
+				
                 <div class="control-group<?php if (!empty($errors) AND Arr::get($errors, 'title')) : ?> error<?php endif; ?>">
 		            <label for="title" class="control-label"><?php echo __('Title окна') ?>:</label>
 	                <div class="controls">

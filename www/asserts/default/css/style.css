@@ -144,17 +144,18 @@ a:focus, a:hover {
 #list-wrap .list-item .h4{
 	margin-bottom: 5px;
 }
+.main-new-block small, 
 #item-wrap small, 
 #list-wrap .list-item small{
     padding-bottom: 5px;
     display: block;
     font-style: italic;
 }
-#item-wrap img, 
 #list-wrap .list-item img{ 
     width: 80px !important;
     height: auto !important;
 }
+
 footer {
     background-color: #222;
     border-color: #080808;
