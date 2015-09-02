@@ -53,6 +53,29 @@
 
 			return parent::get($article_id, $only_visible);
 		}
+		
+		/**
+		 * Получить список видимых записей
+		 *
+		 * @param int $itemsPerPage строк на странице
+		 * @param int $offset блок строк
+		 *
+		 * @return array
+		 */
+		public function getVisibleList($itemsPerPage, $offset) {
+			
+			$this -> columns = array(
+				'id', 
+				'name', 
+				'title', 
+				'description', 
+				'keywords', 
+				'content', 
+				'created'
+			);
+		
+			return parent::getVisibleList($itemsPerPage, $offset);
+		}
 	} 
 
     /* End of file Article.php */

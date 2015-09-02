@@ -9,7 +9,7 @@
 	 * @author      Суслин Денис 2015г. <programist1985@gmail.com>
 	 */
 	 
-	class Controller_Articles extends Controller_Layout_Default {
+	class Controller_Articles extends Controller_Layout_SiteGRUD {
 	 
 		/**
 		 * Имя контроллера
@@ -34,17 +34,15 @@
 		 */
 		public function action_index() {
 		
-			$data = array();
-			$data[ 'current_page' ] = $this -> cName . 's';
+			$this -> grudIndex();	
+		}
 		
-			if (!$headers = $this -> pageModel -> getByType($data[ 'current_page' ])) {
-				
-				// 404	
-			}
+		/**
+		 * Статья
+		 */
+		public function action_show() {
 		
-			$data[ 'slogan' ] = $headers[ 'title' ];
-			$this -> setParam('pagetitle', $headers[ 'title' ]);
-			$this -> showPage($this -> cName . 's/list', $data);	
+			$this -> grudShow();
 		}
 	} 
 

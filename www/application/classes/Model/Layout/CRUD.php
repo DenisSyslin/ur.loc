@@ -52,6 +52,34 @@
 		}
 		
 		/**
+		 * Получить список видимых записей
+		 *
+		 * @param int $itemsPerPage строк на странице
+		 * @param int $offset блок строк
+		 *
+		 * @return array
+		 */
+		public function getVisibleList($itemsPerPage, $offset) {
+		
+			$this -> columns = array('id', 'name', 'title', 'description', 'keywords', 'content', 'created');
+			
+			$query = DB::select_array($this -> columns)
+				-> from($this -> _table_name)
+				-> where('visible', '=', 'yes')
+				-> order_by('created', 'DESC')
+				-> limit($itemsPerPage)
+				-> offset($offset)
+				-> execute();
+			
+			if (count($query)) {
+			
+				return $query -> as_array();
+			}
+			
+			return FALSE;
+		}
+		
+		/**
 		 * Получить колличество записей
 		 *
 		 * @param bool $only_visible только видимая запись

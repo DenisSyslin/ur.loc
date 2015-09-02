@@ -8,7 +8,7 @@
 				<h4 class="h4">
 					<a href="<?php echo URL::site('news/show/' . $item[ 'id' ]) ?>" title="<?php echo $item[ 'name' ]; ?>"><?php echo $item[ 'name' ]; ?></a>
 				</h4>
-				<small><?php echo Date::formatted_time($item[ 'created' ], 'd/m/Y H:i'); ?></small>
+				<small><?php echo Date::formatted_time($item[ 'created' ], 'd-m-Y H:i'); ?></small>
 				<article>
 					<?php $content = explode('<div style="page-break-after: always;"><span style="display: none;">&nbsp;</span></div>', $item[ 'content' ]); ?>
 					<?php echo current($content); ?>

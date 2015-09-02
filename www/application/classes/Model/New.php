@@ -63,23 +63,18 @@
 		 * @return array
 		 */
 		public function getVisibleList($itemsPerPage, $offset) {
+			
+			$this -> columns = array(
+				'id', 
+				'name', 
+				'title', 
+				'description', 
+				'keywords', 
+				'content', 
+				'created'
+			);
 		
-			$this -> columns = array('id', 'name', 'title', 'description', 'keywords', 'content', 'created');
-			
-			$query = DB::select_array($this -> columns)
-				-> from($this -> _table_name)
-				-> where('visible', '=', 'yes')
-				-> order_by('created', 'DESC')
-				-> limit($itemsPerPage)
-				-> offset($offset)
-				-> execute();
-			
-			if (count($query)) {
-			
-				return $query -> as_array();
-			}
-			
-			return FALSE;
+			return parent::getVisibleList($itemsPerPage, $offset);
 		}
 	} 
 
