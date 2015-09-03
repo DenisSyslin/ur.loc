@@ -2,7 +2,12 @@
 <?php echo View::factory($TMP_PATH . '/block/header', array('slogan' => $slogan)); ?>
 
 <div id="list-wrap">
-	<p><?php echo $searchWord; ?></p>
+	<p>
+		<strong>Запрос: </strong><em><?php echo $searchWord; ?></em><br/>
+		<strong>Результатов по запросу: </strong><?php echo $pagination -> total_items; ?><br/>
+		<strong>Время: </strong><?php echo $searchStop; ?> Second
+	</p>
+	<hr/>
 	<?php if (!empty($items)) : ?>
 		
 		<?php foreach($items as $item) : ?>
@@ -25,4 +30,4 @@
 
 	<?php endif; ?>
 </div>
-
+<?php echo $pagination ?>

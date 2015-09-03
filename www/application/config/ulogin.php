@@ -6,7 +6,7 @@ return array
 	'type' 			=> 'panel',
 	
 	// на какой адрес придёт POST-запрос от uLogin
-	'redirect_uri' 	=>	'kohana.loc',
+	'redirect_uri' 	=>	'account',
 	
 	// Сервисы, выводимые сразу, раскомментируйте строку
 	'providers'		=> array(

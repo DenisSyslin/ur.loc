@@ -1,35 +1,51 @@
 <div class="row">
-	<div class="span6">
-	<h2><?php echo $user -> username; ?></h2>
-	<ul>
-		<li>Аватарка: <img src="<?php echo $photo; ?>" class="img-rounded" /></li>
-		<li>E-mail: <?php echo $user -> email; ?></li>
-		<li>Последнее посещение: <?php echo Date::fuzzy_span($user -> last_login); ?></li>
-	</ul>
-	<hr />
-	<?php if (isset($_GET['changeok']))    : ?> Новый пароль был успешно сохранен<hr /><?php endif; ?> 
-	<?php if (isset($_GET['changefalse'])) : ?> Старый пароль введен не верно или новый пароль слишком слабый<hr /><?php endif; ?>
-	<form action="/account/changepass" method="post">
-		Смена пароля: <input type="password" name="oldpassword" placeholder="Старый пароль" /><br />
-		Новый пароль: <input type="password" name="newpassword" placeholder="Новый пароль" /><br />
-		<input type="submit" class="btn" value="Изменить пароль" />
-	</form>
+	<div class="col-lg-6">
+		<h2><?php echo $user -> username; ?></h2>
+		<div>
+			<img src="<?php echo $photo; ?>" class="img-rounded" />
+			<p>E-mail: <?php echo $user -> email; ?></p>
+			<p>Последнее посещение: <?php echo Date::fuzzy_span($user -> last_login); ?></p>
+			<a href="/account/logout" class="btn btn-primary">Выйти</a>
+		</div>
+		<hr />
+		<?php if (isset($_GET['changeok'])) : ?> 
+			<div class="alert bg-info">
+				<button type="button" class="close" aria-hidden="true">&times;</button>
+				Новый пароль был успешно сохранен
+			</div>
+		<?php endif; ?> 
+
+		<form method="post" action="/account/changepass" role="form">
+			<div class="form-group">
+				<label for="oldpassword">Смена пароля</label>
+				<input id="oldpassword" type="password" name="oldpassword" class="form-control" placeholder="Старый пароль" />
+				<?php if (!empty($errors[ 'oldpassword' ])) : ?>
+					<p class="text-danger"><?php echo Arr::get($errors, 'oldpassword') ?></p>
+				<?php endif; ?>
+			</div>
+			<div class="form-group">
+				<label for="newpassword">Новый пароля</label>
+				<input id="newpassword" type="password" name="newpassword" class="form-control" placeholder="Новый пароль" />
+				<?php if (!empty($errors[ 'newpassword' ])) : ?>
+					<p class="text-danger"><?php echo Arr::get($errors, 'newpassword') ?></p>
+				<?php endif; ?>
+			</div>
+			<button type="submit" class="btn btn-primary">Изменить пароль</button>
+		</form>
 	</div>
-	<div class="span6">
+	<div class="col-lg-6">
 		<h3>Аккаунты социальных сетей:</h3>
 		
-		<? if (isset($networks) && count($networks) > 0) : ?>
+		<?php if (isset($networks) && count($networks) > 0) : ?>
 			<?php foreach ($networks as $n) : ?> 
-				<a href="<?php echo $n[ 'identity' ]; ?>" target="_blank"><?php echo $n[ 'identity' ]; ?></a><br />
+				<p><a href="<?php echo $n[ 'identity' ]; ?>" target="_blank"><?php echo $n[ 'identity' ]; ?></a></p>
 			<?php endforeach; ?> 
 		<?php else : ?>
-			Аккаунты социальных сетей еще не добавлены :( 
+			<p>Аккаунты социальных сетей еще не добавлены :(</p>
 		<?php endif; ?>
 		<hr />
-		Добавить другие аккаунты:
-		<br />
+		<p>Добавить другие аккаунты:</p>
 		<?php echo $ulogin; ?>
-		<hr />
-		<a href="/account/logout" class="btn">Выйти</a>
+		
 	</div>
 </div>

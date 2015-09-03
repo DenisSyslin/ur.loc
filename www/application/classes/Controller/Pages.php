@@ -114,7 +114,7 @@
 					$subject = __(Config::getSiteParam('site_name')) . ':: Сообщение от пользователя ' . $data[ 'name' ];
 					$from    = $data[ 'email' ];
 				
-					Helper_Mail::mailSend(__(Config::getSiteParam('site_email')), $subject, $message, $from);
+					Helper_Mail::mailSend(Config::getSiteParam('site_email'), $subject, $message, $from);
 
 					// Сообщение
 					Session::instance() -> set('mess', 'Спасибо за интерес проявленный к нашей компании. Мы свяжемся с вами в ближайшее время.');
@@ -149,14 +149,7 @@
 		
 			$data = array();
 			$data[ 'current_page' ] = 'search';
-			
-			$pageNum = $this -> request -> param('id');
-			
-			if (empty($pageNum)) {
-			
-				$pageNum = 1;
-			}
-			
+
 			if ($this -> request -> method() === Request::POST) {
 
 				$post = $this -> request -> post();
@@ -177,7 +170,8 @@
 				throw new HTTP_Exception_404('Страница не найдена.');
 			}
 			
-			$searchWord = Session::instance() -> get('searchWord');
+			$searchStart = microtime(true);
+			$searchWord  = Session::instance() -> get('searchWord');
 
 			// Подключить постраничную навигацию			
 			$this -> pagination	= Pagination::factory();
@@ -186,10 +180,13 @@
 			$offset = $this -> pagination -> offset;
 			
 			// Элементы страницы
-			$data[ 'items' ] = $this -> model -> search($limit, $offset);
+			$data[ 'items' ] = $this -> model -> search($searchWord, $limit, $offset);
 			
 			$this -> pagination -> total_items = $this -> model -> foundRows();
 			
+			$searchStop = microtime(true) - $searchStart;
+
+			$data[ 'searchStop' ] = $searchStop;
 			$data[ 'pagination' ] = $this -> pagination;
 			$data[ 'searchWord' ] = $searchWord;
 			

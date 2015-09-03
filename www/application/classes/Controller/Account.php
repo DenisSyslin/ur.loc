@@ -16,7 +16,8 @@
 		 */
 		public function action_index() {
 			
-			$data   = array();           
+			$data   = array();   
+			$data[ 'current_page' ] = '';			
 			$ulogin = Ulogin::factory();
 			
 			// если ранее юлогин не вызывался
@@ -32,55 +33,48 @@
 					$user = $ulogin -> login(); // залогиниться
 					
 					// если из соц.сети можно достать фото пользователя
-					if ($user[ 'photo' ] != '') {
+					if (!empty($user[ 'photo' ])) {
 					
-						// кладем в папку /uploads/users (не забудьте про права на запись!)
-						$fp = fopen(DOCROOT . 'uploads/users/' . Auth::instance() -> get_user() -> id . '.jpg', 'w');  
-						fwrite($fp, file_get_contents($user[ 'photo' ])); // скачиваем его
-						fclose($fp);
+						// кладем в папку
+						$this -> _photoWrite($user[ 'photo' ]);
 						
 						// обновляем запись, что у пользователя есть фото
-						DB::update('users') 
-							-> set(array('photo' => 1)) 
-							-> where('id', '=', Auth::instance() -> get_user() -> id) 
-							-> execute(); 
+						$userORM = ORM::factory('user', Auth::instance() -> get_user() -> id);
+						$userORM -> set('photo', 1) -> update();
 					}
-					
-					$session = Session::instance(); // стартуем сессии
-					
+
 					// если пользователь хотел куда-то перейти
-					if ($session -> get('redirectAfterLogin') != '') { 
+					if (Session::instance() -> get('redirectAfterLogin') != '') { 
 					 
-						$redirect = $session -> get('redirectAfterLogin'); 
-						$session -> delete('redirectAfterLogin'); // удаляем запись об этом
-						HTTP::redirect($redirect);                // и редиректим
+						$redirect = Session::instance() -> get_once('redirectAfterLogin'); 
+						HTTP::redirect($redirect);  
 					}
 				}
 				catch(ORM_Validation_Exception $e) {
 					
 					// если возникли ошибки - выводим в переменную login
-					$this -> template -> login = $e -> errors(''); 
+					$this -> template -> login = $e -> errors('Ощибка входа'); 
 				}
 			}
 
 			// если пользователь не авторизован
-			if (!$data['user'] = Auth::instance() -> get_user()) {
+			if (!$data[ 'user' ] = Auth::instance() -> get_user()) {
 			
 				// редиректим на страницу со входом/регистрацией
 				HTTP::redirect('/account/registration'); 
-			} 
-
-			if (Auth::instance() -> get_user() -> photo == 1) {
-				
-				// выводим фото
-				$data['photo'] = "/uploads/users/" . Auth::instance() -> get_user() -> id . ".jpg"; 
 			} 
 			
 			$data[ 'ulogin' ] = $ulogin -> render(); // стартуем сессии
 			$data[ 'photo' ]  = '/uploads/users/nophoto.jpg';
 
+			if (Auth::instance() -> get_user() -> photo == 1) {
+				
+				// выводим фото
+				$data[ 'photo' ] = sprintf("/uploads/users/%s.jpg",  Auth::instance() -> get_user() -> id); 
+			} 
+
 			// берем данные по всем присоединенным аккаунтам пользователя
-			$data[ 'networks' ] = DB::select("identity") 
+			$data[ 'networks' ] = DB::select('identity') 
 				-> from('ulogins') 
 				-> where("user_id", "=", Auth::instance() -> get_user() -> id) 
 				-> execute() 
@@ -88,7 +82,7 @@
 			
 			$this -> setParam('pagetitle', 'Личный кабинет');
 			
-			$this -> showPage('account', $data);	
+			$this -> showPage('account/account', $data);	
 		}
 
 		/**
@@ -96,58 +90,52 @@
 		 */
 		public function action_login() {
 			
-			$data = array();		
-
-			// если переданы POST данные
-			if ($this -> request -> method() !== Request::POST)  {
-				
-				// проверяем - стоит ли флаг - запомнить меня
-				$remember = array_key_exists('rememberme', $this -> request -> post())
-					? (bool) $this -> request -> post('rememberme') 
-					: FALSE;
-				
-				// Параметры авторизации
-				$userEmail = $this -> request -> post('email');
-				$userPass  = $this -> request -> post('password');
-				
-				// Авторизация прошла успешно
-				if ($user = Auth::instance() -> login($userEmail, $userPass, $remember)) {
-
-					// Для отправки пользователя на страницу в которую он попасть не смог
-					if (Session::instance() -> get('redirectAfterLogin') != '') { 
-					
-						$redirect = Session::instance() -> get_once('redirectAfterLogin');
-						HTTP::redirect($redirect);
-					}
-					
-					HTTP::redirect('/account/');
-				} 
-				else {
-					
-					// Авторизация не прошла
-					$data[ 'message' ] = Kohana::message('auth', 'wrongPass'); 
-				}
-				
-				$data[ 'email' ] = $userEmail;
-			}
-			
+			// Значки социальных сетей
 			$ulogin = Ulogin::factory(); 
 			
-			// Значки социальных сетей
+			$data = array();   
+			$data[ 'item' ] = array();
+			$data[ 'current_page' ] = '';			
 			$data[ 'ulogin' ] = $ulogin -> render(); 
-				
-			// Вставляем username, если он был введен
-			$data[ 'username' ] = array_key_exists('username', $this -> request -> post()) 
-				? htmlspecialchars($this -> request -> post('username')) 
-				: ''; 
-				
-			// Вставляем email, если он был введен
-			$data[ 'email' ]  = array_key_exists('email', $this -> request -> post()) 
-				? htmlspecialchars($this -> request -> post('email')) 
-				: '';
 			
+			// если переданы POST данные
+			if ($this -> request -> method() == Request::POST)  {
+				
+				$post = $this -> _getLoginValidation();
+			
+				// Выполнить проверку
+				if ($post -> check()) {
+				
+					$post = $post -> data();
+					
+					// проверяем - стоит ли флаг - запомнить меня
+					$remember = (!empty($post[ 'rememberme' ]) ? (bool) $post[ 'rememberme' ] : FALSE);
+					
+					// Авторизация прошла успешно
+					if ($user = Auth::instance() -> login($post[ 'email' ], $post[ 'password' ], $remember)) {
+
+						// Для отправки пользователя на страницу в которую он попасть не смог
+						if (Session::instance() -> get('redirectAfterLogin') != '') { 
+						
+							$redirect = Session::instance() -> get_once('redirectAfterLogin');
+							HTTP::redirect($redirect);
+						}
+						
+						HTTP::redirect('/account/');
+					} 
+					
+					$data[ 'message' ] = 'Авторизация не прошла'; 
+				}
+				else {
+					
+					// Список ошибок
+					View::set_global('login_errors', $post -> errors('validation'));
+				} 
+				
+				$data[ 'item' ] = $this -> request -> post();
+			}
+				
 			$this -> setParam('pagetitle', 'Авторизация');
-			
 			$this -> showPage('account/login', $data);	
 		}
 
@@ -156,70 +144,55 @@
 		 */
 		public function action_registration() {	
 			
-			$data = array();
-			
-			if ($this -> request -> method() !== Request::POST) {			
-			
-				try {
-
-					// Проверить поля
-					$object = Validation::factory($this -> request -> post());
-					$object
-						 -> rule('username', 'not_empty')
-						 -> rule('username', 'min_length', array(':value', '4'))
-						 -> rule('password', 'not_empty')
-						 -> rule('password', 'min_length', array(':value', '5'))
-						 -> rule('email',    'email');
-
-					// Проверка пройдена - регистрируем
-					$user = ORM::factory('User') 
-						 -> set('email',    $this -> request -> post('email'))
-						 -> set('username', $this -> request -> post('username'))
-						 -> set('password', $this -> request -> post('password'))
-						 -> save();
-
-					// даем новому пользователю роль для логина
-					$user -> add('roles', ORM::factory('Role', array('name' => 'login')));
-
-					// очищаем массив с POST
-					$_POST = array();
-
-					$to      = $this -> request -> post('email');
-					$subject = Kohana::message('account', 'email.themes.registration');
-					$from    = Kohana::message('account', 'email.from');
-					$message = 'Вы успешно зарегистрировались с паролем - '.$this -> request -> post('password');
-
-					// отправляем пользователю сообщение с его паролем
-					Email::send($to, $from, $subject, $message, $html = false); 
-
-					// сразу же авторизуем его, без ввода логина и пароля
-					Auth::instance() -> force_login($user); 
-					HTTP::redirect('/account/');
-				} 
-				catch (ORM_Validation_Exception $e) {
-
-					// если во время валидации возникли ошибки
-					$data[ 'messageReg' ] = Kohana::message('account', 'errorReg');
-					$data[ 'errors' ]     = $e -> errors('models');			
-					// берем значения ошибок из файла /application/messages/model/user.php
-				}
-			}	
-			
+			// Значки социальных сетей
 			$ulogin = Ulogin::factory(); 
 			
-			// Значки социальных сетей
+			$data = array();   
+			$data[ 'item' ] = array();
+			$data[ 'current_page' ] = '';			
 			$data[ 'ulogin' ] = $ulogin -> render(); 
-				
-			// Вставляем username, если он был введен
-			$data[ 'username' ] = array_key_exists('username', $this -> request -> post()) 
-				? htmlspecialchars($this -> request -> post('username')) 
-				: ''; 
-				
-			// Вставляем email, если он был введен
-			$data[ 'email' ]  = array_key_exists('email', $this -> request -> post()) 
-				? htmlspecialchars($this -> request -> post('email')) 
-				: ''; 
 			
+			if ($this -> request -> method() == Request::POST) {			
+			
+				$post = $this -> _getRegistrationValidation();
+			
+				// Выполнить проверку
+				if ($post -> check()) {
+				
+					$post = $post -> data();
+
+					// Проверка пройдена - регистрируем
+					$user_id = DB::insert('users') 
+						-> set(array(
+							'username' => $post[ 'username' ], 
+							'email'    => $post[ 'email' ], 
+							'password' => $post[ 'password' ]
+						)) 
+						-> execute();
+
+					// Даем новому пользователю роль для логина
+					$user -> add('roles', ORM::factory('Role', array('name' => 'login')));
+
+					$subject = sprintf('Регистрация на %s', URL::base(true, false));
+					$message = 'Вы успешно зарегистрировались с паролем - ' . $post[ 'password' ];
+
+					// отправляем пользователю сообщение с его паролем
+					Helper_Mail::mailSend($post[ 'email' ], $subject, $message, Config::getSiteParam('site_email')); 
+
+					// Сразу авторизуем пользователя, без ввода логина и пароля
+					Auth::instance() -> force_login($user); 
+					
+					HTTP::redirect('/account/');
+				}
+				else {
+					
+					// Список ошибок
+					View::set_global('errors', $post -> errors('validation'));
+				} 
+			
+				$data[ 'item' ] = $this -> request -> post();
+			}	
+
 			$this -> setParam('pagetitle', 'Регистрация');
 			
 			$this -> showPage('account/login', $data);	
@@ -277,8 +250,9 @@
 		 */ 
 		public function action_forgot() {
 			
-			$data = array();
 			$post = array();
+			$data = array();   
+			$data[ 'current_page' ] = '';		
 			
 			// если были какие-то POST данные
 			if (HTTP_Request::POST == $this  ->  request  ->  method()) {
@@ -359,6 +333,70 @@
 			Auth::instance() -> logout();
 			HTTP::redirect('/account/');
 		}	
+		
+		/**
+		 * Положить аватарку на диск
+		 *
+		 * @param string $userPhoto путь до фотки
+		 */
+		private function _photoWrite($userPhoto) {
+		
+			$path = sprintf('%suploads/users/%s.jpg', DOCROOT, Auth::instance() -> get_user() -> id);
+		
+			// кладем в папку /uploads/users (не забудьте про права на запись!)
+			$fp = fopen($path, 'w');  
+			fwrite($fp, file_get_contents($userPhoto)); // скачиваем его
+			fclose($fp);
+			
+			return true;
+		}
+		
+		/**
+		 * Получить объект валидации POST запроса, формы входа
+		 */
+		protected function _getLoginValidation() {
+		
+			$post = $this -> request -> post();
+			$post = array_map('trim', $post);
+			$post = array_map('strip_tags', $post);
+		
+			$post = Validation::factory($post)
+				-> rule('email',    'not_empty')
+				-> rule('email',    'email')
+				-> rule('password', 'not_empty')
+				-> labels(array(
+					'email'    => 'Email',
+					'password' => 'Пароль',
+				));
+
+			return $post;
+		}
+		
+		/**
+		 * Получить объект валидации POST запроса, формы входа
+		 */
+		protected function _getRegistrationValidation() {
+		
+			$post = $this -> request -> post();
+			$post = array_map('trim', $post);
+			$post = array_map('strip_tags', $post);
+
+			$post = Validation::factory($post)
+				-> rule('username', 'not_empty')
+				-> rule('username', 'min_length', array(':value', '4'))
+				-> rule('password', 'not_empty')
+				-> rule('password', 'min_length', array(':value', '5'))
+				-> rule('email',    'not_empty')
+				-> rule('email',    'email')
+				-> rule('email',    'Model_Validate::unique_useremail', array(':value', false))
+				-> labels(array(
+					'username' => 'Отображаемое имя',
+					'email'    => 'Email',
+					'password' => 'Пароль',
+				));
+
+			return $post;
+		}
 	}
 	
     /* End of file Account.php */

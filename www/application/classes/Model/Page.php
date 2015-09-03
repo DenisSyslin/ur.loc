@@ -97,41 +97,51 @@
 		 * Поиск слова
 		 *
 		 * @param string $word искомое слово
+		 * @param int $itemsPerPage строк на странице
+		 * @param int $offset блок строк
 		 * @return array
 		 */
-		public function search($word) {
+		public function search($word, $itemsPerPage, $offset) {
+		
+			$this -> tnews = 'news';
+
 			$query = DB::query(Database::SELECT, 'SELECT SQL_CALC_FOUND_ROWS *
 				FROM (
 					(
 						SELECT 
-							MATCH (name, title, content) AGAINST ("свободы") AS Relevance, id, name, title, description, keywords, content, created, \'news\' AS type 
+							MATCH (name, title, content) AGAINST (":search") AS Relevance, id, name, title, description, keywords, content, created, \'news\' AS type 
 						FROM `news` 
 						WHERE 
-							MATCH (name, title, content) AGAINST ("свободы")
+							MATCH (name, title, content) AGAINST (":search")
 							AND visible = \'yes\' 
 					)
 					UNION
 					(
 						SELECT 
-							MATCH (name, title, content) AGAINST ("свободы") AS Relevance, id, name, title, description, keywords, content, created, \'articles\' AS type  
+							MATCH (name, title, content) AGAINST (":search") AS Relevance, id, name, title, description, keywords, content, created, \'articles\' AS type  
 						FROM `articles` 
 						WHERE 
-							MATCH (name, title, content) AGAINST ("свободы")
+							MATCH (name, title, content) AGAINST (":search")
 							AND visible = \'yes\' 
 					)
-				) AS q
-				ORDER BY Relevance DESC');
-				
+				) AS serachResult
+				ORDER BY Relevance DESC
+				LIMIT :offset, :row_count'
+			);
+			
+			$query -> param(':search', $word);
+			$query -> param(':offset', $offset);
+			$query -> param(':row_count', $itemsPerPage);
+
 			$result = $query -> execute();
 			
 			if (count($result)) {
-			
+
 				return $result -> as_array();
 			}
 			
 			return FALSE;	
 		}
-		
 	} 
 
     /* End of file Page.php */
