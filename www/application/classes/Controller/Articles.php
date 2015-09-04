@@ -26,7 +26,7 @@
 			parent::__construct($request, $response);
 		
 			$this -> model = Model::factory(UTF8::ucfirst($this -> cName));
-			$this -> pageModel = Model::factory('page');
+			$this -> pageModel = Model::factory('Page');
 		}
 		
 		/**
