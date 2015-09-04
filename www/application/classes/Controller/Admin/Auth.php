@@ -79,6 +79,7 @@
 			$template -> set('errors', $errors);
 	 
 			// set content into template
+			$this -> template -> set('pagetitle', 'Authorization');
 			$this -> template -> set('content', $template);
 			$this -> template -> set('TMP_PATH', parent::TMP_PATH);
 		}

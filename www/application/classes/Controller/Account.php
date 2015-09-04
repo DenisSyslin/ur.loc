@@ -20,12 +20,13 @@
 			$data[ 'current_page' ] = '';			
 			$ulogin = Ulogin::factory();
 			
-			// если ранее юлогин не вызывался
-			if (!$ulogin -> mode()) {
-				
-				$this -> template -> login = $ulogin -> render(); // рисуем значки соц.сетей
+			// Есть сообщение о смене пароля
+			if (Session::instance() -> get('changeStatus') != '') { 
+			 
+				$data[ 'changeStatus' ] = Session::instance() -> get_once('changeStatus'); 
 			}
-			else {
+					
+			if ($ulogin -> mode()) {
 				
 				// пробуем
 				try {
@@ -161,14 +162,12 @@
 				
 					$post = $post -> data();
 
-					// Проверка пройдена - регистрируем
-					$user_id = DB::insert('users') 
-						-> set(array(
-							'username' => $post[ 'username' ], 
-							'email'    => $post[ 'email' ], 
-							'password' => $post[ 'password' ]
-						)) 
-						-> execute();
+					// если проверка пройдена - регистрируем
+					$user = ORM::factory( 'User' ) 
+						-> set('email',    $post[ 'email' ])
+						-> set('username', $post[ 'username' ])
+						-> set('password', $post[ 'password' ])
+						-> save();
 
 					// Даем новому пользователю роль для логина
 					$user -> add('roles', ORM::factory('Role', array('name' => 'login')));
@@ -203,46 +202,45 @@
 		 */ 
 		public function action_changepass() {
 
-			// проверяем новый пароль на корректность заполнения
-			$object = Validation::factory($this -> request -> post());  
-			$object
+			// Проверяем новый пароль на корректность заполнения
+			$post = Validation::factory($this -> request -> post())
 				 -> rule('newpassword', 'not_empty')
 				 -> rule('newpassword', 'min_length', array(':value', '5'));
 
-			// если новый пароль удовлетворяет требованиям
-			if ($object -> check()) {
+			// Если новый пароль удовлетворяет требованиям
+			if ($post -> check()) {
 				
-				// берем хэш текущего пароль пользователя
-				$realoldpass = Auth::instance() -> get_user() -> password;
+				// Данные пользователя
+				$user_id = Auth::instance() -> get_user() -> id; 
+				$oldPass = Auth::instance() -> get_user() -> password;
 
-				// сравниваем с тем, что ввел пользователь
-				$oldpass     = Auth::instance() -> hash_password($this -> request -> post('oldpassword')); 
+				// Полуить хеши паролей
+				$oldPassHASH = Auth::instance() -> hash_password($post[ 'oldpassword' ]); 
+				$newPassHASH = Auth::instance() -> hash_password($post[ 'newpassword' ]); 				
 				
-				// если они совпадают
-				if ($realoldpass === $oldpass) {
+				//Проверяем совпадение
+				if ($oldPassHASH === $oldPass) {
 					
+					// Меняем пароль
 					DB::update('users') 
-						-> set(array(
-								'password' => Auth::instance() -> hash_password($this -> request -> post('newpassword'))
-							)
-						) 
-						-> where('id', '=', Auth::instance() -> get_user() -> id) 
+						-> set(array('password' => $newPassHASH)) 
+						-> where('id', '=', $user_id) 
 						-> execute();
-
-					// меняем пароль и редиректим на страницу с поздравлением	
-					HTTP::redirect('/account/?changeok');  
-				} 
-				else {
+						
+					Session::instance() -> set('changeStatus', 'changeok');
 					
-					// если нет - сообщаем об ошибке
-					HTTP::redirect('/account/?changefalse');  
-				}
+					// Редиректим на страницу с поздравлением	
+					HTTP::redirect('/account/');  
+				} 
 			}
 			else {
 				
-				// если нет - сообщаем об ошибке
-				HTTP::redirect('/account/?changefalse'); 
-			}
+				// Список ошибок
+				View::set_global('errors', $post -> errors('validation'));
+			} 
+			
+			Session::instance() -> set('changeStatus', 'changefalse');
+			HTTP::redirect('/account/');  
 		}
 
 		/**
@@ -253,72 +251,79 @@
 			$post = array();
 			$data = array();   
 			$data[ 'current_page' ] = '';		
+			$email = '';
 			
-			// если были какие-то POST данные
 			if (HTTP_Request::POST == $this  ->  request  ->  method()) {
+			
+				// Проверяем новый пароль на корректность заполнения
+				$post = Validation::factory($this -> request -> post())
+					-> rule('email', 'not_empty')
+					-> rule('email', 'email');
 				
-				// в любом случае выводим сообщение о том, что пароль отправлен. Пусть думают что все почтовые аккаунты имеют своих владельцев
-				$data[ 'message' ] = Kohana::message('account', 'passwordSended'); 
-
-				// а теперь действительно ищем - есть ли пользователь со введенным адресом
-				$user = ORM::factory('User', array('email' => $this -> request -> post('email'))); 
+				// Проверить 				
+				if ($post -> check()) { 
 				
-				// если есть
-				if ($user -> loaded()) { 
+					$email = $post['email' ];
 					
-					$session = Session::instance();
+					// В любом случае выводим сообщение о том, что пароль отправлен. Пусть думают что все почтовые аккаунты имеют своих владельцев
+					$data[ 'message' ] = 'Ссылка для восстановления пароля была отправлена на указанную почту'; 
 
-					// записываем в сессию хэш, который будем проверять
-					$hash = md5(time() . $this -> request -> post('email')); 
-					$session -> set('forgotpass', $hash);
-					$session -> set('forgotmail', $this -> request -> post('email')); // и почту записываем
+					// Теперь действительно ищем - есть ли пользователь со введенным адресом
+					$user = ORM::factory('User', array('email' => $email)); 
 					
-					$to      = $this -> request -> post('email');
-					$subject = Kohana::message('account', 'email.themes.passworReset');
-					$from    = Kohana::message('account', 'email.from');
-					$message = 'Для сброса пароля пройдите по ссылке - <a href="' . URL::base(true, false) . 'account/forgot?change=' . $hash . '">СБРОСИТЬ</a>'; 
+					// Если есть
+					if ($user -> loaded()) { 
+						
+						// Записываем в сессию хэш, который будем проверять
+						$hash = md5(time() . $email); 
+						
+						Session::instance() -> set('forgotpass', $hash);
+						Session::instance() -> set('forgotmail', $email); // и почту записываем
+						
+						$subject = sprintf('Восстановление пароля на %s', URL::base(true, false));
+						$message = sprintf('Для сброса пароля пройдите по ссылке - <a href="%saccount/forgot/%s">СБРОСИТЬ</a>', URL::base(true, false), $hash); 
+						
+						// Отправляем ссылку с хэшем для сброса пароля
+						Helper_Mail::mailSend($email, $subject, $message, Config::getSiteParam('site_email')); 
+					}	
+				} 
+				else {
 					
-					// отправляем ссылку с хэшем для сброса пароля
-					Email::send($to, $from, $subject, $message, $html = true);	
-				}	
+					// Список ошибок
+					View::set_global('errors', $post -> errors('validation'));
+				} 
 			}
 			
-			$restore = Arr::get($_GET, 'change');
+			$URLhash = $this -> request -> param('hash');
 			
 			// если человек прошел по ссылке в письме
-			if ($restore) {
+			if ($URLhash) {
 			
-				$session = Session::instance();
-
 				// проверяем его сессию - действительно ли именно он запросил сброс?
-				if ($session -> get('forgotpass') === $restore) {
+				if (Session::instance() -> get_once('forgotpass') === $URLhash) {
 					
-					$newpass = substr(md5(time() . $session -> get('forgotmail')), 0, 8); // генерируем новый пароль
-					$to      = $session -> get('forgotmail');
-					$subject = Kohana::message('account', 'email.themes.newPassword');
-					$from    = Kohana::message('account', 'email.from');
-					$message = 'Ваш новый пароль - "' . $newpass . '" без кавычек. <a href="http://ratefilm.ru/account/">Войти</a>'; 
-
+					$forgotmail = Session::instance() -> get_once('forgotmail');
+					
+					$newpass = substr(md5(time() . $forgotmail), 0, 8); // генерируем новый пароль
+					
 					// ставим новый пароль пользователю
 					DB::update('users') 
 						-> set(array('password' => Auth::instance() -> hash_password($newpass))) 
-						-> where('email', '=', $session -> get('forgotmail')) 
+						-> where('email', '=', $forgotmail) 
 						-> execute(); 
 						
-					$session -> delete('forgotpass');
-					$session -> delete('forgotmail'); // очищаем сессию
-					
-					// отправляем новый пароль пользователю
-					Email::send($to, $from, $subject, $message, $html = true);	
+					$subject = 'Ваш новый пароль на ' . URL::base(true, false);
+					$message = sprintf('Ваш новый пароль - "%s" без кавычек. <a href="%saccount/">Войти</a>', $newpass, URL::base(true, false)); 
 
+					// отправляем новый пароль пользователю
+					Helper_Mail::mailSend($forgotmail, $subject, $message, Config::getSiteParam('site_email')); 
+					
 					// сообщаем об успехе процедуры
-					$data[ 'message' ] = Kohana::message('account', 'newPassSended'); 
+					$data[ 'message' ] = 'Новый пароль был отправлен Вам на почту!'; 
 				}
 			}
 			
-			$data[ 'email' ] = array_key_exists('email', $this -> request -> post()) 
-				? htmlspecialchars($this -> request -> post('email')) 
-				: '';
+			$data[ 'email' ] = $email;
 			
 			$this -> setParam('pagetitle', 'Забыли пароль?');
 			
@@ -384,6 +389,7 @@
 			$post = Validation::factory($post)
 				-> rule('username', 'not_empty')
 				-> rule('username', 'min_length', array(':value', '4'))
+				-> rule('username', 'Model_Validate::unique_username', array(':value', false))
 				-> rule('password', 'not_empty')
 				-> rule('password', 'min_length', array(':value', '5'))
 				-> rule('email',    'not_empty')

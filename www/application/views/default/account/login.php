@@ -4,7 +4,7 @@
 		<h4>Войти на сайт</h4>
 		<?php if (isset($message)) : ?>
 			<div class="alert alert-danger">
-				<button type="button" class="close" aria-hidden="true">&times;</button>
+				<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
 				<?php echo $message ?>
 			</div>
 		<?php endif; ?>
@@ -29,7 +29,7 @@
 					<input type="checkbox" name="rememberme" value="true"/> Запомнить меня
 				</label>
 			</div>
-			<a href="/account/forgot" class="btn">Забыли пароль?</a>
+			<a href="/account/forgot" class="btn btn-default">Забыли пароль?</a>
 			<button type="submit" class="btn btn-primary">Войти на сайт</button>
 		</form>
 	</div>

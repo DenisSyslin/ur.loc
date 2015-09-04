@@ -47,6 +47,7 @@ a:focus, a:hover {
 .main-container {
 	min-height: 560px;
 	margin-top: 102px;
+	margin-bottom: 20px;
 }
 .main-row {
 	margin-top: 24px;

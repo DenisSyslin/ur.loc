@@ -7,11 +7,26 @@
 			<p>Последнее посещение: <?php echo Date::fuzzy_span($user -> last_login); ?></p>
 			<a href="/account/logout" class="btn btn-primary">Выйти</a>
 		</div>
+
+	</div>
+	<div class="col-lg-6">
+		<h3>Аккаунты социальных сетей:</h3>
+		
+		<?php if (isset($networks) && count($networks) > 0) : ?>
+			<?php foreach ($networks as $n) : ?> 
+				<p><a href="<?php echo $n[ 'identity' ]; ?>" target="_blank"><?php echo $n[ 'identity' ]; ?></a></p>
+			<?php endforeach; ?> 
+		<?php else : ?>
+			<p>Аккаунты социальных сетей еще не добавлены :(</p>
+		<?php endif; ?>
 		<hr />
-		<?php if (isset($_GET['changeok'])) : ?> 
-			<div class="alert bg-info">
-				<button type="button" class="close" aria-hidden="true">&times;</button>
-				Новый пароль был успешно сохранен
+		<p>Добавить другие аккаунты:</p>
+		<?php echo $ulogin; ?>
+		<hr />
+		<?php if (!empty($changeStatus) ) : ?> 
+			<div class="alert <?php echo ($changeStatus === 'changeok') ? 'bg-info' : 'bg-danger' ?>">
+				<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+				<?php echo ($changeStatus === 'changeok') ? 'Новый пароль был успешно сохранен' : 'Ошибка смены пароля' ?>
 			</div>
 		<?php endif; ?> 
 
@@ -32,20 +47,5 @@
 			</div>
 			<button type="submit" class="btn btn-primary">Изменить пароль</button>
 		</form>
-	</div>
-	<div class="col-lg-6">
-		<h3>Аккаунты социальных сетей:</h3>
-		
-		<?php if (isset($networks) && count($networks) > 0) : ?>
-			<?php foreach ($networks as $n) : ?> 
-				<p><a href="<?php echo $n[ 'identity' ]; ?>" target="_blank"><?php echo $n[ 'identity' ]; ?></a></p>
-			<?php endforeach; ?> 
-		<?php else : ?>
-			<p>Аккаунты социальных сетей еще не добавлены :(</p>
-		<?php endif; ?>
-		<hr />
-		<p>Добавить другие аккаунты:</p>
-		<?php echo $ulogin; ?>
-		
 	</div>
 </div>
