@@ -130,6 +130,7 @@
 			'orm'        => MODPATH . 'orm',        // Object Relationship Mapping
 			'pagination' => MODPATH . 'pagination', // Pagination module
 			'ulogin'     => MODPATH . 'ulogin',     // Ulogin module
+			'comments'   => MODPATH . 'comments',   // виджеты социальных комментариев
 		//	'userguide'  => MODPATH . 'userguide',  // User guide and API documentation
 		//	'cache'      => MODPATH . 'cache',      // Caching with multiple backends
 		//	'codebench'  => MODPATH . 'codebench',  // Benchmarking tool

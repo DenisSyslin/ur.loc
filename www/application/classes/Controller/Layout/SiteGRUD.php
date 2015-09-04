@@ -92,6 +92,8 @@
 			$data[ 'item' ]   = $record;
 			$data[ 'slogan' ] = $record[ 'name' ];
 			
+			$data[ 'comments' ] = Comments::factory() -> render();
+			
 			$this -> setPageParams($record);
 			$this -> showPage($this -> cName . 's/show', $data);	
 		}

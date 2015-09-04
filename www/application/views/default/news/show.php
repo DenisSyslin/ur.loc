@@ -4,6 +4,7 @@
 	<small><?php echo Date::formatted_time($item[ 'created' ], 'd-m-Y H:i'); ?></small>
 	<article>
 		<?php echo $item[ 'content' ]; ?>
+		<?php echo $comments; ?>
 		<div class="clearfix"></div>
 	</article>
 </div>
