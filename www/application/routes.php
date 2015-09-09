@@ -1,5 +1,10 @@
 <?php
 
+	Route::set('error', 'error/<action>(/<message>)', array('action' => '[0-9]++', 'message' => '.+')) 
+		-> defaults(array(
+			'controller' => 'Error_Handler'
+		));
+	
 	Route::set('default-admin', 'admin(/<controller>(/<action>(/<id>)))')
 		 -> defaults(array(
 			'directory'  => 'admin',

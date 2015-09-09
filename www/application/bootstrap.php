@@ -82,7 +82,7 @@
 	 * Note: If you supply an invalid environment name, a PHP warning will be thrown
 	 * saying "Couldn't find constant Kohana::<INVALID_ENV_NAME>"
 	 */
-	 Kohana::$environment = 'DEVELOPMENT';
+	Kohana::$environment = 'PRODUCTION';
 	 
 	if (isset($_SERVER['KOHANA_ENV'])) {
 	
@@ -140,7 +140,7 @@
 		));
 
 	/**
-	 * DB Config Storage
+	 * DB Config Storage (получение конфигурации из БД в массив, для ускорения работы)
 	 */
 	Kohana::$config -> attach(new Config_Database(
 			array(
@@ -162,6 +162,10 @@
 	 */
 	Cookie::$salt = 'k2n34jdsd92j1l2j';
 	
+	/**
+	 * Routing File
+	 *
+	 */
 	require_once APPPATH . 'routes' . EXT;
 	
 

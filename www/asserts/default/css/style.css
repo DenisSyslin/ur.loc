@@ -43,7 +43,6 @@ a:focus, a:hover {
 	font: normal normal normal 32px/1.1em 'open sans',sans-serif;
 	color: #404144;
 }
-
 .main-container {
 	min-height: 560px;
 	margin-top: 102px;
@@ -139,6 +138,8 @@ a:focus, a:hover {
     margin: 20px 0 90px 0;
     font-size: 25px;
 }
+.h6_500 { margin: 50px auto 0px auto;text-align: center;  color: red;  font-size: 15px;  font-weight: bold;}
+.p_500 { margin: 0px auto 50px auto;text-align: center;}
 #list-wrap .list-item {
     margin-top: 20px;
 }
