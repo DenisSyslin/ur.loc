@@ -68,11 +68,16 @@
 		}
 	 
 		/**
-		 * Внутренняя ошибка сервера
+		 * Сервис недоступен
 		 */
 		public function action_503() {
+		
+			$data = array();
+			$data[ 'current_page' ] = $this -> cName;
+			
+			$this -> template -> set('pagetitle', 'Сервис недоступен');
 
-			$this -> template -> title = 'Сервис недоступен';
+			$this -> showPage($this -> cName . 's/503', $data);	
 		}
 	 
 		/**

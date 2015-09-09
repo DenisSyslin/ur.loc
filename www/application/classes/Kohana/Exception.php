@@ -24,7 +24,8 @@
 
 				try {
 
-					Kohana::$log -> add(Log::ERROR, parent::text($e));
+					// Пишем в журнал
+					Kohana_Exception::log($e);
 	 
 					$attributes = array (
 						'action'  => 500,

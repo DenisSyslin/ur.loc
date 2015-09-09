@@ -108,7 +108,7 @@
 				// Выполнить проверку
 				if ($post -> check()) {
 				
-					$data = /$post -> data();
+					$data = $post -> data();
 				
 					$message = $data[ 'comment' ];
 					$subject = __(Config::getSiteParam('site_name')) . ':: Сообщение от пользователя ' . $data[ 'name' ];

@@ -1,18 +1,18 @@
 ﻿<?php defined('SYSPATH') or die('No direct script access.');
 
 	/**
-	 * Класс ошибки 404
+	 * Класс ошибки 503
 	 *
-	 * @name        HTTP_Exception_404
+	 * @name        HTTP_Exception_503
 	 * @category    classes
 	 * @subcategory Controller
 	 * @author      Суслин Денис 2015г. <programist1985@gmail.com>
 	 */
 	 
-	class HTTP_Exception_404 extends Kohana_HTTP_Exception_404 {
+	class HTTP_Exception_503 extends Kohana_HTTP_Exception_503 {
 		
 		/**
-		 * Генирация ответа на ошибку 404
+		 * Генирация ответа на ошибку 503
 		 *
 		 * @return Response
 		 */
@@ -37,16 +37,16 @@
 			// Переменные шаблона
 			$layout -> menu    = $menu;
 			$layout -> footer  = View::factory($TMP_PATH . '/block/footer');
-			$layout -> content = View::factory($TMP_PATH . '/errors/404', array());
-			$layout -> pagetitle = '404 Страница не найдена';
+			$layout -> content = View::factory($TMP_PATH . '/errors/503', array());
+			$layout -> pagetitle = 'Сервис недоступен';
 
 			// Рендерим страницу
 			return Response::factory()
-				-> status(404)
+				-> status(503)
 				-> body($layout -> render());
 		}
 	}
 
-    /* End of file 404.php */
-    /* Location: ./application/classes/HTTP/Exception/404.php */
+    /* End of file 503.php */
+    /* Location: ./application/classes/HTTP/Exception/503.php */
 	

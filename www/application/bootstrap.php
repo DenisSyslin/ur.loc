@@ -82,7 +82,8 @@
 	 * Note: If you supply an invalid environment name, a PHP warning will be thrown
 	 * saying "Couldn't find constant Kohana::<INVALID_ENV_NAME>"
 	 */
-	Kohana::$environment = 'PRODUCTION';
+	Kohana::$environment = Kohana::PRODUCTION;
+	//Kohana::$environment = Kohana::DEVELOPMENT;
 	 
 	if (isset($_SERVER['KOHANA_ENV'])) {
 	
