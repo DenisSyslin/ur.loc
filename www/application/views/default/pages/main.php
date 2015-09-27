@@ -24,7 +24,7 @@
 
 <div class="row main-row">
 	<div class="col-lg-8">
-		<h5 class="sub-h5">Новости и публикации</h5>
+		<h5 class="sub-h5">Новости</h5>
 		<?php if (!empty($lastNews)) : ?>
 			<?php foreach($lastNews as $item) : ?>
 				<div class="main-new-block">
