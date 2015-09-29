@@ -57,7 +57,7 @@
 			}
 			
 			$data[ 'lastNews' ]   = $this -> newsModel -> getLastNews(2);
-			$data[ 'otherPages' ] = $this -> model -> getByType('other', true);
+			$data[ 'otherPages' ] = $this -> model -> getMainPagePages();
 			
 			$data[ 'slogan' ] = $headers[ 'name' ];
 			

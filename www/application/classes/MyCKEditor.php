@@ -68,9 +68,10 @@
 				array('Outdent','Indent','-','TextColor','BGColor','-','Subscript','Superscript'),
 				array('uiColor')
 			);
-		
+
 			ob_start();
 			$CKEditor -> editor($name, $value, $config);
+			
 			return ob_get_clean();
 		}     
 	}

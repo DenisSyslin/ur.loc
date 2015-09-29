@@ -89,6 +89,11 @@
 		
 			$post = array_map('trim', $this -> request -> post());
 		
+			if (empty($post[ 'show_on_main_page' ]) OR $post[ 'show_on_main_page' ] != 'yes') {
+				
+				$post[ 'show_on_main_page' ] = 'no';
+			}
+		
 			$post = Validation::factory($post)
 				-> labels(array(
 					'type'        => __('Тип страницы'),

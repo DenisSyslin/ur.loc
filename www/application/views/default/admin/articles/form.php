@@ -57,6 +57,25 @@
 					</label>
 		        </div>
 
+		        <div class="control-group">
+					<?php
+						$checked = '';
+						$showOnMainPage = Arr::get($item, 'show_on_main_page');
+
+						if (!empty($showOnMainPage)) {
+							if ($showOnMainPage == 'yes') {
+								$checked = 'checked="checked"';
+							}
+						}
+					?>
+					<label class="checkbox inline">
+						<input type="checkbox" name="show_on_main_page" value="yes" <?php echo $checked; ?>/><?php echo 'Отображать на главной' ?>
+					    <?php if (!empty($errors) AND Arr::get($errors, 'show_on_main_page')) : ?>
+							<div class="help-block"><?php echo Arr::get($errors, 'show_on_main_page') ?></div>
+						<?php endif; ?>
+					</label>
+		        </div>
+				
 	        </fieldset>
 	    </div>
 

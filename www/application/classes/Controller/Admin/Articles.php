@@ -88,7 +88,7 @@
 		protected function _getPostValidation() {
 		
 			$post = array_map('trim', $this -> request -> post());
-		
+			
 			$post = Validation::factory($post)
 				-> labels(array(
 						
@@ -98,6 +98,7 @@
 					'description' => __('Описнаие'),
 					'keywords'    => __('Ключевые слова'),
 					'visible'     => __('Видимость'),
+					'show_on_main_page' => __('Отображать на главной'),
 				))
 				-> rule('name', 'not_empty')
 				-> rule('content', 'not_empty')

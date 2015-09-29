@@ -131,6 +131,7 @@ class CKEditor
 	public function editor($name, $value = "", $config = array(), $events = array())
 	{
 		$attr = "";
+
 		foreach ($this->textareaAttributes as $key => $val) {
 			$attr.= " " . $key . '="' . str_replace('"', '&quot;', $val) . '"';
 		}
@@ -138,7 +139,6 @@ class CKEditor
 		if (!$this->initialized) {
 			$out .= $this->init();
 		}
-
 		$_config = $this->configSettings($config, $events);
 
 		$js = $this->returnGlobalEvents();
@@ -148,7 +148,6 @@ class CKEditor
 			$js .= "CKEDITOR.replace('".$name."');";
 
 		$out .= $this->script($js);
-
 		if (!$this->returnOutput) {
 			print $out;
 			$out = "";

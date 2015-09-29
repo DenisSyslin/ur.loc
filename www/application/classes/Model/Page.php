@@ -51,7 +51,7 @@
 		 */
 		public function get($page_id, $only_visible = false) {
 		
-			$this -> columns = array('id', 'type', 'name', 'title', 'description', 'keywords', 'content', 'created', 'visible');
+			$this -> columns = array('id', 'type', 'name', 'title', 'description', 'keywords', 'content', 'created', 'visible', 'show_on_main_page');
 
 			return parent::get($page_id, $only_visible);
 		}
@@ -88,6 +88,30 @@
 				}
 			
 				return current($records);
+			}
+			
+			return FALSE;		
+		}
+
+		/**
+		 * Получить страницы отображаемые на главной странице
+		 *
+		 * @return array
+		 */
+		public function getMainPagePages() {
+		
+			$this -> columns = array('id', 'type', 'name', 'title', 'description', 'keywords', 'content', 'created', 'visible');
+			
+			$query = DB::select_array($this -> columns)
+				-> from($this -> _table_name)
+				-> where('show_on_main_page', '=', 'yes')
+				-> where('visible', '=', 'yes');
+			
+			$result = $query -> execute();
+			
+			if (count($result)) {
+			
+				return $result -> as_array();
 			}
 			
 			return FALSE;		
