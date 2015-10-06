@@ -59,9 +59,11 @@
 			
 				$this -> template -> set('pagetitle', $data[ 'pagetitle' ]);
 			}
-		
+
 			// Set content template
 			$this -> template -> set('content', $html);
+			$this -> template -> set('scripts', $this -> scripts);
+			$this -> template -> set('styles',  $this -> styles);
 		}
 	} 
 

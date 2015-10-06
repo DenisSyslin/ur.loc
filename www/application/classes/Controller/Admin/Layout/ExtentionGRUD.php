@@ -73,9 +73,9 @@
 			$data = array();
 				
 			$data[ 'item' ] = array_merge($this -> request -> post(), array());
-			
-			// Получение визуального редактора
-			View::set_global('contentAria', MyCKEditor::wysiwyg('content', Arr::get($data[ 'item' ], 'content')));
+
+			$this -> addScript('js_plagins/ckeditor/ckeditor.js');
+			$this -> addScript('js_plagins/myckeditor.js');
 
 			$this -> setParam('pagetitle', $pagetitle);
 			$this -> showAdmin($this -> cName . 's/new', $data);	
@@ -88,7 +88,6 @@
 		 * @throws HTTP_Exception_404
 		 */
 		protected function grudEdit($pagetitle) {
-		
 		
 			$data = array();
 			
@@ -105,16 +104,11 @@
 
 				throw new HTTP_Exception_404('Запись не найдена.');
 			}
-	 
-			//echo '<pre>';
-			//print_r($record);
-			//echo '</pre>';
-			//die();
+
+			$this -> addScript('js_plagins/ckeditor/ckeditor.js');
+			$this -> addScript('js_plagins/myckeditor.js');
 				
 			$data[ 'item' ] = $record;
-			
-			// Получение визуального редактора
-			View::set_global('contentAria', MyCKEditor::wysiwyg('content', Arr::get($data[ 'item' ], 'content')));
 			
 			$this -> setParam('pagetitle', $pagetitle);
 			$this -> showAdmin($this -> cName . 's/edit', $data);	

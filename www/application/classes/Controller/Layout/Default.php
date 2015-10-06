@@ -20,7 +20,6 @@
 	 
 		/**
 		 * Default layout template
-		 *
 		 * @property View
 		 * @access public
 		 */
@@ -42,17 +41,13 @@
 	 
 		/**
 		 * Auto loading configs groups
-		 *
 		 * @property array
 		 * @access public
 		 */
-		public $config_groups = array(
-			'blog',
-		);
+		public $config_groups = array('blog');
 	 
 		/**
 		 * Auto loaded configs
-		 *
 		 * @property array (group => params)
 		 * @access public
 		 */
@@ -60,7 +55,6 @@
 	 
 		/**
 		 * Global variables
-		 *
 		 * @property array
 		 * @access private
 		 */
