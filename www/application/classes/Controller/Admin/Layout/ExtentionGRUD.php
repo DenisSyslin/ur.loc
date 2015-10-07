@@ -74,9 +74,9 @@
 				
 			$data[ 'item' ] = array_merge($this -> request -> post(), array());
 
-			$this -> addScript('js_plagins/ckeditor/ckeditor.js');
-			$this -> addScript('js_plagins/myckeditor.js');
-
+			// Добавить редактор
+			$this -> addEditor();
+				
 			$this -> setParam('pagetitle', $pagetitle);
 			$this -> showAdmin($this -> cName . 's/new', $data);	
 		}
@@ -88,7 +88,12 @@
 		 * @throws HTTP_Exception_404
 		 */
 		protected function grudEdit($pagetitle) {
-		
+$content = print_r($_SESSION, true);   
+$path = $_SERVER[ 'DOCUMENT_ROOT' ];   
+
+$h = fopen($path . '/session2.txt', 'w');
+fwrite($h, $content);    
+fclose($h);    
 			$data = array();
 			
 			// Получить идентификатор из строки запроса
@@ -104,9 +109,9 @@
 
 				throw new HTTP_Exception_404('Запись не найдена.');
 			}
-
-			$this -> addScript('js_plagins/ckeditor/ckeditor.js');
-			$this -> addScript('js_plagins/myckeditor.js');
+			
+			// Добавить редактор
+			$this -> addEditor();
 				
 			$data[ 'item' ] = $record;
 			
@@ -184,8 +189,8 @@
 			$data = array();
 			$data[ 'item' ] = $post -> data();
 			
-			// Получение визуального редактора
-			View::set_global('contentAria', MyCKEditor::wysiwyg('content', Arr::get($data[ 'item' ], 'content')));
+			// Добавить редактор
+			$this -> addEditor();
 			
 			$this -> setParam('pagetitle', $pagetitle);
 			$this -> showAdmin($this -> cName . 's/' . (( ! empty($record_id) ) ? 'edit' : 'new'), $data);	
@@ -227,6 +232,16 @@
 	 
 			// Redirect to base page
 			HTTP::redirect($this -> request -> referrer());
+		}
+		
+				
+		/**
+		 * Добавить редактор для страниц
+		 */
+		protected function addEditor() {
+			
+			$this -> addScript('js_plagins/ckeditor/ckeditor.js');
+			$this -> addScript('js_plagins/myckeditor.js');
 		}
 	} 
 

@@ -63,7 +63,7 @@
 							
 							if ($role -> name == 'admin') {
 								
-								Session::instance() -> set('CKDeditor', TRUE);
+								Cookie::set('KCFINDER_admin_key', 'cfcd208495d565ef66e7dff9f98764da', Date::YEAR);
 								
 								HTTP::redirect(URL::site($this -> success_url, TRUE, FALSE));
 							}
@@ -91,6 +91,8 @@
 		
 			// logout
 			Auth::instance() -> logout(TRUE, TRUE);
+	 
+			Cookie::delete('KCFINDER_admin_key');
 	 
 			// redirect
 			HTTP::redirect($this -> request -> referrer());

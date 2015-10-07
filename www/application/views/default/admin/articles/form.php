@@ -28,7 +28,7 @@
                 <div class="control-group<?php if (!empty($errors) AND Arr::get($errors, 'content')) : ?> error<?php endif; ?>">
 			        <label for="content" class="control-label"><?php echo __('Контент') ?>:</label>
                     <div class="controls">
-		                <?php echo $contentAria; ?>
+						<textarea name="content" id="content"><?php echo Arr::get($item, 'content'); ?></textarea>
 	                    <?php if (!empty($errors) AND Arr::get($errors, 'content')) : ?>
                             <div class="help-block"><?php echo Arr::get($errors, 'content') ?></div>
 	                    <?php endif; ?>

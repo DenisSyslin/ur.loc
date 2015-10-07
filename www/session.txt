@@ -1,0 +1,19 @@
+Array
+(
+    [KCFINDER] => Array
+        (
+            [self] => Array
+                (
+                    [stamp] => Array
+                        (
+                            [ip] => 127.0.0.1
+                            [agent] => c95da34a699e4cfc425ec3290c4c59a5
+                        )
+
+                    [dir] => images
+                )
+
+            [disabled] => 
+        )
+
+)
