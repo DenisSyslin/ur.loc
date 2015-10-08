@@ -88,12 +88,7 @@
 		 * @throws HTTP_Exception_404
 		 */
 		protected function grudEdit($pagetitle) {
-$content = print_r($_SESSION, true);   
-$path = $_SERVER[ 'DOCUMENT_ROOT' ];   
-
-$h = fopen($path . '/session2.txt', 'w');
-fwrite($h, $content);    
-fclose($h);    
+			
 			$data = array();
 			
 			// Получить идентификатор из строки запроса
