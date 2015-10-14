@@ -17,6 +17,9 @@
 		<li <?php if ($current == 'about') : ?>class="active"<?php endif; ?>>
 			<a href="<?php echo URL::site('/pages/about') ?>">О нас</a>
 		</li>
+		<li>
+			<a title="Перейти на форум" target="_blank" href="<?php echo URL::site('/forum') ?>">Форум</a>
+		</li>
 	</ul>
 	<form class="navbar-form navbar-right" action="<?php echo URL::site('/pages/search') ?>" method="POST">
 		<input id="site-search-text" name="query" type="text" class="form-control" placeholder="Поиск..."/>

@@ -250,10 +250,11 @@ class __TwigTemplate_67da36f99076ce1f0758c4e091a003ffb04b485baad9b72b85bf5ef3b63
 ";
         // line 67
         // line 68
-        echo "
+        echo "<link href=\"/asserts/default/css/forum.css\" rel=\"stylesheet\" type=\"text/css\"/>
+<link rel=\"shortcut icon\" href=\"/favicon.png\" type=\"image/png\">
 </head>
 <body id=\"phpbb\" class=\"nojs notouch section-";
-        // line 70
+        // line 71
         echo (isset($context["SCRIPT_NAME"]) ? $context["SCRIPT_NAME"] : null);
         echo " ";
         echo (isset($context["S_CONTENT_DIRECTION"]) ? $context["S_CONTENT_DIRECTION"] : null);
@@ -262,8 +263,8 @@ class __TwigTemplate_67da36f99076ce1f0758c4e091a003ffb04b485baad9b72b85bf5ef3b63
         echo "\">
 
 ";
-        // line 72
         // line 73
+        // line 74
         echo "
 <div id=\"wrap\">
 \t<a id=\"top\" class=\"anchor\" accesskey=\"t\"></a>
@@ -273,7 +274,7 @@ class __TwigTemplate_67da36f99076ce1f0758c4e091a003ffb04b485baad9b72b85bf5ef3b63
 
 \t\t\t<div id=\"site-description\">
 \t\t\t\t<a id=\"logo\" class=\"logo\" href=\"";
-        // line 81
+        // line 82
         if ((isset($context["U_SITE_HOME"]) ? $context["U_SITE_HOME"] : null)) {
             echo (isset($context["U_SITE_HOME"]) ? $context["U_SITE_HOME"] : null);
         } else {
@@ -289,33 +290,33 @@ class __TwigTemplate_67da36f99076ce1f0758c4e091a003ffb04b485baad9b72b85bf5ef3b63
         echo (isset($context["SITE_LOGO_IMG"]) ? $context["SITE_LOGO_IMG"] : null);
         echo "</a>
 \t\t\t\t<h1>";
-        // line 82
+        // line 83
         echo (isset($context["SITENAME"]) ? $context["SITENAME"] : null);
         echo "</h1>
 \t\t\t\t<p>";
-        // line 83
+        // line 84
         echo (isset($context["SITE_DESCRIPTION"]) ? $context["SITE_DESCRIPTION"] : null);
         echo "</p>
 \t\t\t\t<p class=\"skiplink\"><a href=\"#start_here\">";
-        // line 84
+        // line 85
         echo $this->env->getExtension('phpbb')->lang("SKIP");
         echo "</a></p>
 \t\t\t</div>
 
 \t\t\t";
-        // line 87
         // line 88
+        // line 89
         echo "\t\t\t";
         if (((isset($context["S_DISPLAY_SEARCH"]) ? $context["S_DISPLAY_SEARCH"] : null) &&  !(isset($context["S_IN_SEARCH"]) ? $context["S_IN_SEARCH"] : null))) {
-            // line 89
+            // line 90
             echo "\t\t\t<div id=\"search-box\" class=\"search-box search-header\" role=\"search\">
 \t\t\t\t<form action=\"";
-            // line 90
+            // line 91
             echo (isset($context["U_SEARCH"]) ? $context["U_SEARCH"] : null);
             echo "\" method=\"get\" id=\"search\">
 \t\t\t\t<fieldset>
 \t\t\t\t\t<input name=\"keywords\" id=\"keywords\" type=\"search\" maxlength=\"128\" title=\"";
-            // line 92
+            // line 93
             echo $this->env->getExtension('phpbb')->lang("SEARCH_KEYWORDS");
             echo "\" class=\"inputbox search tiny\" size=\"20\" value=\"";
             echo (isset($context["SEARCH_WORDS"]) ? $context["SEARCH_WORDS"] : null);
@@ -323,13 +324,13 @@ class __TwigTemplate_67da36f99076ce1f0758c4e091a003ffb04b485baad9b72b85bf5ef3b63
             echo $this->env->getExtension('phpbb')->lang("SEARCH_MINI");
             echo "\" />
 \t\t\t\t\t<button class=\"button icon-button search-icon\" type=\"submit\" title=\"";
-            // line 93
+            // line 94
             echo $this->env->getExtension('phpbb')->lang("SEARCH");
             echo "\">";
             echo $this->env->getExtension('phpbb')->lang("SEARCH");
             echo "</button>
 \t\t\t\t\t<a href=\"";
-            // line 94
+            // line 95
             echo (isset($context["U_SEARCH"]) ? $context["U_SEARCH"] : null);
             echo "\" class=\"button icon-button search-adv-icon\" title=\"";
             echo $this->env->getExtension('phpbb')->lang("SEARCH_ADV");
@@ -337,7 +338,7 @@ class __TwigTemplate_67da36f99076ce1f0758c4e091a003ffb04b485baad9b72b85bf5ef3b63
             echo $this->env->getExtension('phpbb')->lang("SEARCH_ADV");
             echo "</a>
 \t\t\t\t\t";
-            // line 95
+            // line 96
             echo (isset($context["S_SEARCH_HIDDEN_FIELDS"]) ? $context["S_SEARCH_HIDDEN_FIELDS"] : null);
             echo "
 \t\t\t\t</fieldset>
@@ -345,13 +346,13 @@ class __TwigTemplate_67da36f99076ce1f0758c4e091a003ffb04b485baad9b72b85bf5ef3b63
 \t\t\t</div>
 \t\t\t";
         }
-        // line 100
+        // line 101
         echo "
 \t\t\t</div>
 \t\t</div>
 \t\t";
-        // line 103
         // line 104
+        // line 105
         echo "\t\t";
         $location = "navbar_header.html";
         $namespace = false;
@@ -360,27 +361,27 @@ class __TwigTemplate_67da36f99076ce1f0758c4e091a003ffb04b485baad9b72b85bf5ef3b63
             $previous_look_up_order = $this->env->getNamespaceLookUpOrder();
             $this->env->setNamespaceLookUpOrder(array($namespace, '__main__'));
         }
-        $this->loadTemplate("navbar_header.html", "overall_header.html", 104)->display($context);
+        $this->loadTemplate("navbar_header.html", "overall_header.html", 105)->display($context);
         if ($namespace) {
             $this->env->setNamespaceLookUpOrder($previous_look_up_order);
         }
-        // line 105
+        // line 106
         echo "\t</div>
 
 \t";
-        // line 107
         // line 108
+        // line 109
         echo "
 \t<a id=\"start_here\" class=\"anchor\"></a>
 \t<div id=\"page-body\" role=\"main\">
 \t\t";
-        // line 111
+        // line 112
         if ((((isset($context["S_BOARD_DISABLED"]) ? $context["S_BOARD_DISABLED"] : null) && (isset($context["S_USER_LOGGED_IN"]) ? $context["S_USER_LOGGED_IN"] : null)) && ((isset($context["U_MCP"]) ? $context["U_MCP"] : null) || (isset($context["U_ACP"]) ? $context["U_ACP"] : null)))) {
-            // line 112
+            // line 113
             echo "\t\t<div id=\"information\" class=\"rules\">
 \t\t\t<div class=\"inner\">
 \t\t\t\t<strong>";
-            // line 114
+            // line 115
             echo $this->env->getExtension('phpbb')->lang("INFORMATION");
             echo $this->env->getExtension('phpbb')->lang("COLON");
             echo "</strong> ";
@@ -390,10 +391,10 @@ class __TwigTemplate_67da36f99076ce1f0758c4e091a003ffb04b485baad9b72b85bf5ef3b63
 \t\t</div>
 \t\t";
         }
-        // line 118
+        // line 119
         echo "
 \t\t";
-        // line 119
+        // line 120
     }
 
     public function getTemplateName()
@@ -408,6 +409,6 @@ class __TwigTemplate_67da36f99076ce1f0758c4e091a003ffb04b485baad9b72b85bf5ef3b63
 
     public function getDebugInfo()
     {
-        return array (  397 => 119,  394 => 118,  384 => 114,  380 => 112,  378 => 111,  373 => 108,  372 => 107,  368 => 105,  355 => 104,  354 => 103,  349 => 100,  341 => 95,  333 => 94,  327 => 93,  319 => 92,  314 => 90,  311 => 89,  308 => 88,  307 => 87,  301 => 84,  297 => 83,  293 => 82,  277 => 81,  267 => 73,  266 => 72,  257 => 70,  253 => 68,  252 => 67,  247 => 65,  244 => 64,  243 => 63,  235 => 60,  231 => 58,  223 => 56,  221 => 55,  218 => 54,  210 => 52,  208 => 51,  201 => 49,  197 => 48,  192 => 47,  175 => 32,  173 => 31,  163 => 23,  157 => 21,  155 => 20,  152 => 19,  149 => 17,  132 => 16,  117 => 15,  106 => 14,  95 => 13,  84 => 12,  73 => 11,  62 => 10,  60 => 9,  35 => 7,  31 => 6,  22 => 2,  19 => 1,);
+        return array (  398 => 120,  395 => 119,  385 => 115,  381 => 113,  379 => 112,  374 => 109,  373 => 108,  369 => 106,  356 => 105,  355 => 104,  350 => 101,  342 => 96,  334 => 95,  328 => 94,  320 => 93,  315 => 91,  312 => 90,  309 => 89,  308 => 88,  302 => 85,  298 => 84,  294 => 83,  278 => 82,  268 => 74,  267 => 73,  258 => 71,  253 => 68,  252 => 67,  247 => 65,  244 => 64,  243 => 63,  235 => 60,  231 => 58,  223 => 56,  221 => 55,  218 => 54,  210 => 52,  208 => 51,  201 => 49,  197 => 48,  192 => 47,  175 => 32,  173 => 31,  163 => 23,  157 => 21,  155 => 20,  152 => 19,  149 => 17,  132 => 16,  117 => 15,  106 => 14,  95 => 13,  84 => 12,  73 => 11,  62 => 10,  60 => 9,  35 => 7,  31 => 6,  22 => 2,  19 => 1,);
     }
 }
