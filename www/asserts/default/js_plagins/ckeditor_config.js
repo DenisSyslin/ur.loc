@@ -7,7 +7,8 @@ CKEDITOR.editorConfig = function( config ) {
 	// Define changes to default configuration here.
 	// For complete reference see:
 	// http://docs.ckeditor.com/#!/api/CKEDITOR.config
-
+	
+	config.extraPlugins = 'mediaembed';
 	// The toolbar groups arrangement, optimized for two toolbar rows.
 	config.toolbarGroups = [
 		{ name: 'clipboard',   groups: [ 'clipboard', 'undo' ] },
@@ -36,6 +37,7 @@ CKEDITOR.editorConfig = function( config ) {
 	config.enterMode      = CKEDITOR.ENTER_BR;
 	config.shiftEnterMode = CKEDITOR.ENTER_BR;
 
+	
 	// Simplify the dialog windows.
 	config.removeDialogTabs = 'image:advanced;link:advanced';
 };
